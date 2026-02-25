@@ -56,19 +56,19 @@ export default function LoyaltyPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero */}
-      <div className="bg-[#1a1a2e] py-16">
+      <div className="bg-primary py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center justify-center w-20 h-20 bg-[#d4af37] rounded-full mb-6"
+            className="inline-flex items-center justify-center w-20 h-20 bg-accent rounded-full mb-8 shadow-lg"
           >
-            <Gift className="text-[#1a1a2e]" size={40} />
+            <Gift className="text-primary" size={40} />
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-4"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
           >
             Loyalty Rewards
           </motion.h1>
@@ -76,9 +76,9 @@ export default function LoyaltyPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-white/60 max-w-2xl mx-auto"
+            className="text-white/70 max-w-2xl mx-auto text-lg leading-relaxed"
           >
-            Earn points on every purchase and unlock exclusive rewards. 
+            Earn points on every purchase and unlock exclusive rewards.
             The more you shop, the more you save.
           </motion.p>
         </div>
@@ -92,23 +92,23 @@ export default function LoyaltyPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-2xl shadow-xl overflow-hidden"
+              className="bg-white rounded-2xl shadow-xl shadow-black/5 border border-black/5 overflow-hidden"
             >
-              <div className="bg-gradient-to-r from-[#1a1a2e] to-[#16213e] p-8">
+              <div className="bg-primary p-8 md:p-10">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                   <div>
-                    <p className="text-white/60 mb-1">Welcome back,</p>
-                    <h2 className="text-3xl font-bold text-white">{user.name}</h2>
-                    <p className="text-[#d4af37] font-semibold mt-2 uppercase tracking-wider">
+                    <p className="text-white/70 mb-2 font-medium">Welcome back,</p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">{user.name}</h2>
+                    <p className="text-accent font-semibold mt-3 uppercase tracking-wider text-sm">
                       {currentTier} Member
                     </p>
                   </div>
                   <div className="text-center md:text-right">
-                    <p className="text-white/60 mb-1">Available Points</p>
-                    <p className="text-5xl font-bold text-[#d4af37]">
+                    <p className="text-white/70 mb-2 font-medium">Available Points</p>
+                    <p className="text-5xl md:text-6xl font-bold text-accent tracking-tighter">
                       {user.points.toLocaleString()}
                     </p>
-                    <p className="text-white/60 text-sm mt-1">
+                    <p className="text-white/60 text-sm mt-3 font-medium">
                       Worth Rs. {(user.points * 1).toLocaleString()} in discounts
                     </p>
                   </div>
@@ -128,7 +128,7 @@ export default function LoyaltyPage() {
                           width: `${Math.min(
                             ((user.points - loyaltyTiers[currentTier].min) /
                               (loyaltyTiers[getNextTier()!].min - loyaltyTiers[currentTier].min)) *
-                              100,
+                            100,
                             100
                           )}%`,
                         }}
@@ -189,9 +189,8 @@ export default function LoyaltyPage() {
                         </p>
                       </div>
                       <span
-                        className={`font-bold ${
-                          transaction.type === 'earned' ? 'text-green-600' : 'text-red-600'
-                        }`}
+                        className={`font-bold ${transaction.type === 'earned' ? 'text-green-600' : 'text-red-600'
+                          }`}
                       >
                         {transaction.type === 'earned' ? '+' : '-'}
                         {transaction.points} pts
@@ -225,7 +224,7 @@ export default function LoyaltyPage() {
                   </p>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-foreground/80 mb-2">
                       Full Name
                     </label>
                     <input
@@ -233,7 +232,7 @@ export default function LoyaltyPage() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 outline-none"
+                      className="w-full px-4 py-3 rounded-xl border border-black/10 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all"
                       placeholder="Enter your name"
                     />
                   </div>

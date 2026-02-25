@@ -15,7 +15,7 @@ export default function BrandsSection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-[#d4af37] font-semibold tracking-wider uppercase"
+            className="text-accent font-medium tracking-wider uppercase text-sm"
           >
             Trusted Partners
           </motion.span>
@@ -24,7 +24,7 @@ export default function BrandsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold text-[#1a1a2e] mt-3 mb-4"
+            className="text-4xl md:text-5xl font-bold text-primary mt-3 mb-4 tracking-tight"
           >
             Our Premium Brands
           </motion.h2>
@@ -33,9 +33,9 @@ export default function BrandsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-gray-600 max-w-2xl mx-auto"
+            className="text-foreground/70 max-w-2xl mx-auto text-lg leading-relaxed"
           >
-            We partner with the most trusted paint manufacturers to bring you 
+            We partner with the most trusted paint manufacturers to bring you
             quality products that stand the test of time.
           </motion.p>
         </div>
@@ -51,28 +51,28 @@ export default function BrandsSection() {
           {brands.map((brand, index) => (
             <motion.div
               key={brand.id}
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
               <Link
                 href={`/brands/${brand.id}`}
-                className="group block bg-white rounded-xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#d4af37]"
+                className="group block bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-black/5 hover:border-accent hover:-translate-y-1"
               >
-                <div className="relative h-20 mb-4">
+                <div className="relative h-20 mb-6">
                   <Image
                     src={brand.logo}
                     alt={brand.name}
                     fill
-                    className="object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                    className="object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500 opacity-70 group-hover:opacity-100"
                   />
                 </div>
                 <div className="text-center">
-                  <h3 className="font-semibold text-[#1a1a2e] group-hover:text-[#d4af37] transition-colors">
+                  <h3 className="font-semibold text-primary group-hover:text-accent transition-colors">
                     {brand.name}
                   </h3>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-sm font-medium text-foreground/50 mt-1">
                     {brand.productCount} Products
                   </p>
                 </div>

@@ -19,7 +19,7 @@ export default function FeaturedProducts() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="text-[#d4af37] font-semibold tracking-wider uppercase"
+              className="text-accent font-medium tracking-wider uppercase text-sm"
             >
               Best Sellers
             </motion.span>
@@ -28,7 +28,7 @@ export default function FeaturedProducts() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl md:text-5xl font-bold text-[#1a1a2e] mt-3"
+              className="text-4xl md:text-5xl font-bold text-primary mt-3 tracking-tight"
             >
               Featured Products
             </motion.h2>
@@ -41,10 +41,10 @@ export default function FeaturedProducts() {
           >
             <Link
               href="/products"
-              className="inline-flex items-center gap-2 text-[#d4af37] font-semibold hover:gap-4 transition-all mt-4 md:mt-0"
+              className="inline-flex items-center gap-2 text-accent font-medium hover:text-accent-light transition-all mt-4 md:mt-0 group"
             >
               View All Products
-              <ArrowRight size={20} />
+              <ArrowRight size={20} className="transform transition-transform group-hover:translate-x-1" />
             </Link>
           </motion.div>
         </div>

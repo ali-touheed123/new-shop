@@ -9,7 +9,7 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 
 export default function CartPage() {
   const { cart, removeFromCart, updateQuantity, getCartTotal, clearCart, user, getDiscount } = useStore();
-  
+
   const subtotal = getCartTotal();
   const discount = user ? (subtotal * getDiscount()) / 100 : 0;
   const total = subtotal - discount;
@@ -17,13 +17,13 @@ export default function CartPage() {
 
   if (cart.length === 0) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center px-4">
-          <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <ShoppingBag className="text-gray-400" size={40} />
+          <div className="w-24 h-24 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-6">
+            <ShoppingBag className="text-primary/40" size={40} />
           </div>
-          <h1 className="text-2xl font-bold text-[#1a1a2e] mb-2">Your Cart is Empty</h1>
-          <p className="text-gray-600 mb-6">Looks like you haven&apos;t added any items yet.</p>
+          <h1 className="text-2xl font-bold text-primary mb-2 tracking-tight">Your Cart is Empty</h1>
+          <p className="text-foreground/60 mb-8">Looks like you haven&apos;t added any items yet.</p>
           <Link href="/products" className="btn-luxury inline-flex items-center gap-2">
             Start Shopping
             <ArrowRight size={20} />
@@ -34,14 +34,14 @@ export default function CartPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-[calc(100vh-6rem)] bg-background">
       {/* Hero */}
-      <div className="bg-[#1a1a2e] py-12">
+      <div className="bg-primary py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl md:text-4xl font-bold text-white"
+            className="text-4xl md:text-5xl font-bold text-white tracking-tight"
           >
             Shopping Cart
           </motion.h1>
@@ -49,7 +49,7 @@ export default function CartPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-white/60 mt-2"
+            className="text-white/70 mt-3 text-lg"
           >
             {cart.length} item{cart.length > 1 ? 's' : ''} in your cart
           </motion.p>
@@ -88,7 +88,7 @@ export default function CartPage() {
                     <Gift size={14} />
                     +{item.product.loyaltyPoints * item.quantity} points
                   </p>
-                  
+
                   <div className="flex items-center justify-between mt-3">
                     {/* Quantity Controls */}
                     <div className="flex items-center gap-2">
@@ -138,9 +138,9 @@ export default function CartPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-xl shadow-lg p-6 sticky top-28"
+              className="bg-white rounded-xl shadow-lg shadow-black/5 border border-black/5 p-8 sticky top-32"
             >
-              <h2 className="text-xl font-bold text-[#1a1a2e] mb-6">Order Summary</h2>
+              <h2 className="text-xl font-bold text-primary mb-6">Order Summary</h2>
 
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between">

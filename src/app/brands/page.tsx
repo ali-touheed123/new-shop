@@ -10,12 +10,12 @@ export default function BrandsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero */}
-      <div className="bg-[#1a1a2e] py-16">
+      <div className="bg-primary py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-4"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
           >
             Our Premium Brands
           </motion.h1>
@@ -23,7 +23,7 @@ export default function BrandsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-white/60 max-w-2xl mx-auto"
+            className="text-white/70 max-w-2xl mx-auto text-lg leading-relaxed"
           >
             We partner with the most trusted paint manufacturers to bring you quality products
           </motion.p>
@@ -41,7 +41,7 @@ export default function BrandsPage() {
             >
               <Link
                 href={`/brands/${brand.id}`}
-                className="group block bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
+                className="group block bg-white rounded-2xl shadow-lg shadow-black/5 border border-black/5 overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="p-8">
                   <div className="relative h-24 mb-6">
@@ -52,17 +52,17 @@ export default function BrandsPage() {
                       className="object-contain"
                     />
                   </div>
-                  <h2 className="text-2xl font-bold text-[#1a1a2e] group-hover:text-[#d4af37] transition-colors mb-2">
+                  <h2 className="text-2xl font-bold text-primary group-hover:text-accent transition-colors mb-2">
                     {brand.name}
                   </h2>
-                  <p className="text-gray-600 mb-4">{brand.description}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-[#d4af37] font-semibold">
+                  <p className="text-foreground/70 mb-6 leading-relaxed flex-grow">{brand.description}</p>
+                  <div className="flex items-center justify-between pt-4 border-t border-black/5">
+                    <span className="text-sm text-accent font-semibold tracking-wide uppercase">
                       {brand.productCount} Products
                     </span>
-                    <span className="flex items-center text-[#1a1a2e] group-hover:text-[#d4af37] font-semibold">
+                    <span className="flex items-center text-primary group-hover:text-accent font-semibold transition-colors">
                       Explore
-                      <ArrowRight size={18} className="ml-1 transform group-hover:translate-x-2 transition-transform" />
+                      <ArrowRight size={18} className="ml-1.5 transform group-hover:translate-x-1.5 transition-transform" />
                     </span>
                   </div>
                 </div>

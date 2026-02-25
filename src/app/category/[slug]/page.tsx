@@ -9,9 +9,9 @@ import { notFound } from 'next/navigation';
 
 export default function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
-  
+
   const category = categories.find((c) => c.slug === slug);
-  
+
   if (!category) {
     notFound();
   }
@@ -30,13 +30,13 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a2e] via-[#1a1a2e]/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-transparent" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-block bg-[#d4af37] text-[#1a1a2e] text-sm font-bold px-4 py-1 rounded-full mb-4"
+              className="inline-block bg-accent text-primary text-sm font-bold px-4 py-1.5 rounded-full mb-5 shadow-sm"
             >
               {categoryProducts.length}+ Products
             </motion.span>
@@ -44,7 +44,7 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-6xl font-bold text-white mb-4"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight drop-shadow-lg"
             >
               {category.name}
             </motion.h1>
@@ -52,7 +52,7 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-white/80 text-lg max-w-2xl mx-auto px-4"
+              className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto px-4 leading-relaxed drop-shadow-md"
             >
               {category.description}
             </motion.p>

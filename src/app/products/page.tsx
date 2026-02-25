@@ -72,12 +72,12 @@ export default function ProductsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Banner */}
-      <div className="bg-[#1a1a2e] py-16">
+      <div className="bg-primary py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold text-white text-center"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center tracking-tight"
           >
             Our Products
           </motion.h1>
@@ -85,7 +85,7 @@ export default function ProductsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-white/60 text-center mt-4 max-w-2xl mx-auto"
+            className="text-white/70 text-center mt-6 max-w-2xl mx-auto text-lg leading-relaxed"
           >
             Explore our complete collection of premium paints from top brands
           </motion.p>
@@ -103,14 +103,14 @@ export default function ProductsPage() {
               placeholder="Search products..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 outline-none transition-all"
+              className="w-full pl-12 pr-4 py-3 rounded-xl border border-black/10 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all shadow-sm"
             />
           </div>
 
           {/* Filter Toggle (Mobile) */}
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="lg:hidden flex items-center justify-center gap-2 px-6 py-3 bg-[#1a1a2e] text-white rounded-xl"
+            className="lg:hidden flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-medium shadow-sm hover:opacity-90 transition-opacity"
           >
             <Filter size={20} />
             Filters
@@ -120,7 +120,7 @@ export default function ProductsPage() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="px-4 py-3 rounded-xl border border-gray-200 focus:border-[#d4af37] outline-none bg-white"
+            className="px-4 py-3 rounded-xl border border-black/10 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none bg-white shadow-sm cursor-pointer font-medium text-foreground/80"
           >
             <option value="name">Sort by Name</option>
             <option value="price-low">Price: Low to High</option>
@@ -132,9 +132,8 @@ export default function ProductsPage() {
         <div className="flex gap-8">
           {/* Filters Sidebar */}
           <div
-            className={`${
-              showFilters ? 'fixed inset-0 z-50 bg-white p-6 overflow-auto' : 'hidden'
-            } lg:block lg:relative lg:w-64 lg:flex-shrink-0`}
+            className={`${showFilters ? 'fixed inset-0 z-50 bg-white p-6 overflow-auto' : 'hidden'
+              } lg:block lg:relative lg:w-64 lg:flex-shrink-0`}
           >
             <div className="flex items-center justify-between mb-6 lg:hidden">
               <h3 className="text-xl font-bold">Filters</h3>
@@ -224,7 +223,7 @@ export default function ProductsPage() {
             {/* Clear Filters */}
             <button
               onClick={clearFilters}
-              className="w-full py-3 border-2 border-[#d4af37] text-[#d4af37] rounded-xl font-semibold hover:bg-[#d4af37] hover:text-[#1a1a2e] transition-colors"
+              className="w-full py-3 border-2 border-accent text-accent rounded-xl font-semibold hover:bg-accent hover:text-white transition-colors"
             >
               Clear All Filters
             </button>
@@ -232,7 +231,7 @@ export default function ProductsPage() {
             {/* Apply (Mobile) */}
             <button
               onClick={() => setShowFilters(false)}
-              className="lg:hidden w-full mt-4 py-3 bg-[#1a1a2e] text-white rounded-xl font-semibold"
+              className="lg:hidden w-full mt-4 py-3 bg-primary text-white rounded-xl font-semibold hover:opacity-90 transition-opacity"
             >
               Apply Filters
             </button>

@@ -51,7 +51,7 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="py-24 bg-[#1a1a2e]">
+    <section className="py-24 bg-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -59,7 +59,7 @@ export default function FeaturesSection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-[#d4af37] font-semibold tracking-wider uppercase"
+            className="text-accent font-medium tracking-wider uppercase text-sm"
           >
             Why Choose Us
           </motion.span>
@@ -68,7 +68,7 @@ export default function FeaturesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold text-white mt-3 mb-4"
+            className="text-4xl md:text-5xl font-bold text-white mt-3 mb-4 tracking-tight"
           >
             Premium Features
           </motion.h2>
@@ -77,9 +77,9 @@ export default function FeaturesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-white/60 max-w-2xl mx-auto"
+            className="text-white/70 max-w-2xl mx-auto text-lg leading-relaxed"
           >
-            Experience the best in paint shopping with our exclusive features 
+            Experience the best in paint shopping with our exclusive features
             designed to make your journey seamless.
           </motion.p>
         </div>
@@ -96,15 +96,15 @@ export default function FeaturesSection() {
             >
               <Link
                 href={feature.link}
-                className="group block bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-[#d4af37]/50 transition-all duration-300 hover:transform hover:-translate-y-2"
+                className="group block bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/5 hover:border-accent/30 hover:bg-white/10 transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/20"
               >
-                <div className={`w-14 h-14 ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                <div className={`w-14 h-14 ${feature.color} rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                   <feature.icon className="text-white" size={28} />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#d4af37] transition-colors">
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-accent transition-colors">
                   {feature.title}
                 </h3>
-                <p className="text-white/60">
+                <p className="text-white/70 leading-relaxed text-sm">
                   {feature.description}
                 </p>
               </Link>

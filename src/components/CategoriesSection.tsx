@@ -31,7 +31,7 @@ export default function CategoriesSection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-[#d4af37] font-semibold tracking-wider uppercase"
+            className="text-accent font-semibold tracking-wider uppercase text-sm"
           >
             Our Collections
           </motion.span>
@@ -40,7 +40,7 @@ export default function CategoriesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold text-[#1a1a2e] mt-3 mb-4"
+            className="text-4xl md:text-5xl font-bold text-primary mt-3 mb-4"
           >
             Shop by Category
           </motion.h2>
@@ -49,9 +49,9 @@ export default function CategoriesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-gray-600 max-w-2xl mx-auto"
+            className="text-foreground/70 max-w-2xl mx-auto text-lg"
           >
-            Explore our comprehensive range of paints designed for every application, 
+            Explore our comprehensive range of paints designed for every application,
             from beautiful home interiors to industrial-grade solutions.
           </motion.p>
         </div>
@@ -77,31 +77,31 @@ export default function CategoriesSection() {
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                
+
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a2e] via-[#1a1a2e]/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-                
+                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
+
                 {/* Content */}
-                <div className="absolute inset-0 p-6 flex flex-col justify-end">
+                <div className="absolute inset-0 p-8 flex flex-col justify-end">
                   <div className="transform transition-transform duration-300 group-hover:-translate-y-2">
-                    <span className="inline-block bg-[#d4af37] text-[#1a1a2e] text-xs font-bold px-3 py-1 rounded-full mb-3">
+                    <span className="inline-block bg-accent text-white text-xs font-bold px-3 py-1 rounded-md mb-4 shadow-sm">
                       {category.productCount}+ Products
                     </span>
                     <h3 className="text-2xl font-bold text-white mb-2">
                       {category.name}
                     </h3>
-                    <p className="text-white/70 text-sm mb-4 line-clamp-2">
+                    <p className="text-white/80 text-sm mb-6 leading-relaxed line-clamp-2">
                       {category.description}
                     </p>
-                    <div className="flex items-center text-[#d4af37] font-semibold">
-                      <span>Explore</span>
+                    <div className="flex items-center text-accent font-medium">
+                      <span>Explore Collection</span>
                       <ArrowRight size={18} className="ml-2 transform transition-transform group-hover:translate-x-2" />
                     </div>
                   </div>
                 </div>
 
                 {/* Border Glow Effect */}
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#d4af37]/50 rounded-2xl transition-colors duration-300" />
+                <div className="absolute inset-0 border border-transparent group-hover:border-accent/30 rounded-2xl transition-colors duration-300" />
               </Link>
             </motion.div>
           ))}

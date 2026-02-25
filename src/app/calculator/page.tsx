@@ -77,19 +77,19 @@ export default function PaintCalculatorPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero */}
-      <div className="bg-[#1a1a2e] py-16">
+      <div className="bg-primary py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center justify-center w-20 h-20 bg-[#d4af37] rounded-full mb-6"
+            className="inline-flex items-center justify-center w-20 h-20 bg-accent rounded-full mb-8 shadow-lg"
           >
-            <Calculator className="text-[#1a1a2e]" size={40} />
+            <Calculator className="text-primary" size={40} />
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-4"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
           >
             Paint Calculator
           </motion.h1>
@@ -97,24 +97,24 @@ export default function PaintCalculatorPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-white/60 max-w-2xl mx-auto"
+            className="text-white/70 max-w-2xl mx-auto text-lg leading-relaxed"
           >
-            Calculate exactly how much paint you need for your project. 
+            Calculate exactly how much paint you need for your project.
             No more guessing or wastage.
           </motion.p>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-2 gap-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid lg:grid-cols-2 gap-16">
           {/* Calculator Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            className="bg-white rounded-2xl shadow-xl p-8"
+            className="bg-white rounded-2xl shadow-xl shadow-black/5 border border-black/5 p-10"
           >
-            <h2 className="text-2xl font-bold text-[#1a1a2e] mb-6 flex items-center gap-3">
-              <Paintbrush className="text-[#d4af37]" size={28} />
+            <h2 className="text-2xl font-bold text-primary mb-8 flex items-center gap-3">
+              <Paintbrush className="text-accent" size={28} />
               Room Dimensions
             </h2>
 
@@ -235,8 +235,8 @@ export default function PaintCalculatorPage() {
             className="space-y-6"
           >
             {/* Result Card */}
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              <h2 className="text-2xl font-bold text-[#1a1a2e] mb-6">
+            <div className="bg-white rounded-2xl shadow-xl shadow-black/5 border border-black/5 p-10">
+              <h2 className="text-2xl font-bold text-primary mb-8">
                 Calculation Results
               </h2>
 
@@ -257,12 +257,12 @@ export default function PaintCalculatorPage() {
                     </div>
                   </div>
 
-                  <div className="bg-[#d4af37]/10 border-2 border-[#d4af37] rounded-xl p-6 text-center">
-                    <p className="text-sm text-[#1a1a2e] mb-1">You Need Approximately</p>
-                    <p className="text-5xl font-bold text-[#d4af37]">
+                  <div className="bg-accent/10 border border-accent/20 rounded-xl p-8 text-center">
+                    <p className="text-sm text-primary mb-2 font-medium">You Need Approximately</p>
+                    <p className="text-6xl font-bold text-accent tracking-tighter">
                       {result.litersNeeded} Liters
                     </p>
-                    <p className="text-sm text-gray-600 mt-2">
+                    <p className="text-sm text-foreground/60 mt-3">
                       Based on {COVERAGE_PER_LITER} sq ft coverage per liter
                     </p>
                   </div>
@@ -270,8 +270,8 @@ export default function PaintCalculatorPage() {
                   <div className="bg-blue-50 rounded-xl p-4 flex items-start gap-3">
                     <Info className="text-blue-500 flex-shrink-0 mt-1" size={20} />
                     <p className="text-sm text-blue-700">
-                      This is an estimate. Actual paint needed may vary based on surface 
-                      texture, paint quality, and application method. We recommend buying 
+                      This is an estimate. Actual paint needed may vary based on surface
+                      texture, paint quality, and application method. We recommend buying
                       10% extra for touch-ups.
                     </p>
                   </div>

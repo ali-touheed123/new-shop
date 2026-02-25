@@ -51,19 +51,19 @@ export default function VisualizerPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero */}
-      <div className="bg-[#1a1a2e] py-16">
+      <div className="bg-primary py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center justify-center w-20 h-20 bg-[#d4af37] rounded-full mb-6"
+            className="inline-flex items-center justify-center w-20 h-20 bg-accent rounded-full mb-8 shadow-lg"
           >
-            <Palette className="text-[#1a1a2e]" size={40} />
+            <Palette className="text-primary" size={40} />
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-4"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
           >
             Color Visualizer
           </motion.h1>
@@ -71,9 +71,9 @@ export default function VisualizerPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-white/60 max-w-2xl mx-auto"
+            className="text-white/70 max-w-2xl mx-auto text-lg leading-relaxed"
           >
-            See how different colors look on your walls before making a decision. 
+            See how different colors look on your walls before making a decision.
             Upload your room photo or use our presets.
           </motion.p>
         </div>
@@ -87,11 +87,11 @@ export default function VisualizerPage() {
             animate={{ opacity: 1, y: 0 }}
             className="lg:col-span-2"
           >
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-              <div className="p-6 border-b">
-                <h2 className="text-xl font-bold text-[#1a1a2e]">Room Preview</h2>
+            <div className="bg-white rounded-2xl shadow-xl shadow-black/5 border border-black/5 overflow-hidden">
+              <div className="p-8 border-b border-black/5">
+                <h2 className="text-xl font-bold text-primary">Room Preview</h2>
               </div>
-              
+
               {/* Image Preview with Color Overlay */}
               <div className="relative aspect-video">
                 <Image
@@ -111,9 +111,9 @@ export default function VisualizerPage() {
               </div>
 
               {/* Room Presets */}
-              <div className="p-6">
-                <h3 className="font-semibold text-gray-700 mb-4">Choose a Room</h3>
-                <div className="grid grid-cols-4 gap-3">
+              <div className="p-8">
+                <h3 className="font-semibold text-primary mb-5">Choose a Room</h3>
+                <div className="grid grid-cols-4 gap-4">
                   {presetRooms.map((room) => (
                     <button
                       key={room.id}
@@ -121,11 +121,10 @@ export default function VisualizerPage() {
                         setSelectedRoom(room);
                         setCustomImage(null);
                       }}
-                      className={`relative aspect-video rounded-lg overflow-hidden border-2 transition-all ${
-                        selectedRoom.id === room.id && !customImage
-                          ? 'border-[#d4af37] ring-2 ring-[#d4af37]/30'
-                          : 'border-transparent hover:border-gray-300'
-                      }`}
+                      className={`relative aspect-video rounded-xl overflow-hidden border-2 transition-all ${selectedRoom.id === room.id && !customImage
+                          ? 'border-accent ring-2 ring-accent/30'
+                          : 'border-transparent hover:border-black/10'
+                        }`}
                     >
                       <Image
                         src={room.image}
@@ -134,8 +133,8 @@ export default function VisualizerPage() {
                         className="object-cover"
                       />
                       {selectedRoom.id === room.id && !customImage && (
-                        <div className="absolute inset-0 bg-[#d4af37]/20 flex items-center justify-center">
-                          <Check className="text-[#d4af37]" size={24} />
+                        <div className="absolute inset-0 bg-accent/20 flex items-center justify-center">
+                          <Check className="text-primary font-bold" size={24} />
                         </div>
                       )}
                     </button>
@@ -224,11 +223,10 @@ export default function VisualizerPage() {
                         <button
                           key={color}
                           onClick={() => setSelectedColor(color)}
-                          className={`flex-1 h-10 rounded transition-transform hover:scale-110 ${
-                            selectedColor === color
+                          className={`flex-1 h-10 rounded transition-transform hover:scale-110 ${selectedColor === color
                               ? 'ring-2 ring-[#1a1a2e] ring-offset-2'
                               : ''
-                          }`}
+                            }`}
                           style={{ backgroundColor: color }}
                           title={color}
                         />
