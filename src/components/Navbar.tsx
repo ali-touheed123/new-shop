@@ -34,10 +34,10 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
         className={`pointer-events-auto max-w-[1200px] mx-auto transition-all duration-500 ${isScrolled
-            ? 'glass-dark rounded-[2.5rem] py-3 shadow-2xl'
-            : 'glass rounded-[2rem] py-4 shadow-xl shadow-black/5'
+          ? 'glass-dark rounded-[2.5rem] py-3 shadow-2xl'
+          : 'glass rounded-[2rem] py-4 shadow-xl shadow-black/5'
           }`}
       >
         <div className="px-6 sm:px-8 flex items-center justify-between">
@@ -125,7 +125,7 @@ export default function Navbar() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
               className="lg:hidden overflow-hidden px-6"
             >
               <div className={`py-8 border-t ${isScrolled ? 'border-white/10' : 'border-black/5'} flex flex-col gap-6`}>

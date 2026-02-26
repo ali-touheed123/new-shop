@@ -22,7 +22,7 @@ export default function HeroSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 1, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as const }
     },
   };
 
@@ -106,7 +106,7 @@ export default function HeroSection() {
           <motion.div
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] as const }}
             className="lg:col-span-5 relative"
           >
             {/* Main Immersive Card */}
