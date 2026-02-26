@@ -1,16 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Gift, Crown, Star, TrendingUp, Award, ShoppingBag, Percent, Clock } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Gift, Crown, Star, TrendingUp, Award, ShoppingBag, Percent, Clock, MoveRight, User, ShieldCheck } from 'lucide-react';
 import { useStore } from '@/store';
 import { loyaltyTiers } from '@/lib/data';
 
 const tierInfo = [
   { tier: 'bronze', icon: Award, color: '#CD7F32', minPoints: 0 },
   { tier: 'silver', icon: Star, color: '#C0C0C0', minPoints: 1000 },
-  { tier: 'gold', icon: Crown, color: '#FFD700', minPoints: 5000 },
-  { tier: 'platinum', icon: Gift, color: '#E5E4E2', minPoints: 10000 },
+  { tier: 'gold', icon: Crown, color: '#D4AF37', minPoints: 5000 },
+  { tier: 'platinum', icon: ShieldCheck, color: '#E5E4E2', minPoints: 10000 },
 ];
 
 export default function LoyaltyPage() {
@@ -54,311 +54,318 @@ export default function LoyaltyPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero */}
-      <div className="bg-primary py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div className="min-h-screen bg-[#FAFAFA] pb-32">
+      {/* Editorial Hero */}
+      <div className="relative pt-40 pb-24 overflow-hidden bg-white">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#F5F5F5]" />
+        <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px]" />
+
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 text-left">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center justify-center w-20 h-20 bg-accent rounded-full mb-8 shadow-lg"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex items-center gap-4 mb-8"
           >
-            <Gift className="text-primary" size={40} />
+            <div className="w-12 h-px bg-accent" />
+            <span className="text-accent font-black tracking-[0.2em] uppercase text-xs">The Inner Circle</span>
           </motion.div>
+
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
+            className="display-text text-5xl md:text-7xl lg:text-8xl text-primary"
           >
-            Loyalty Rewards
+            Privilege <br />
+            <span className="text-accent italic">Rewards</span>
           </motion.h1>
+
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-white/70 max-w-2xl mx-auto text-lg leading-relaxed"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-lg md:text-xl text-foreground/50 max-w-2xl mt-8 font-medium leading-relaxed"
           >
-            Earn points on every purchase and unlock exclusive rewards.
-            The more you shop, the more you save.
+            Experience the zenith of patronage. Our loyalty program is an artisanal
+            experience designed for the most discerning connoisseurs of color.
           </motion.p>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 mt-12">
         {user ? (
-          /* Logged In View */
-          <div className="space-y-8">
-            {/* User Dashboard */}
+          /* Premium Dashboard View */
+          <div className="space-y-12">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-[2rem] shadow-xl shadow-black/5 border border-black/5 overflow-hidden"
+              className="glass-dark p-12 rounded-[3.5rem] shadow-2xl relative overflow-hidden group"
             >
-              <div className="bg-primary p-8 md:p-10">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                  <div>
-                    <p className="text-white/70 mb-2 font-medium">Welcome back,</p>
-                    <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">{user.name}</h2>
-                    <p className="text-accent font-semibold mt-3 uppercase tracking-wider text-sm">
-                      {currentTier} Member
-                    </p>
+              <div className="absolute top-0 right-0 p-12 opacity-5">
+                <Crown size={200} />
+              </div>
+
+              <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center text-white">
+                <div>
+                  <p className="text-accent font-black uppercase tracking-[0.3em] text-[10px] mb-4 flex items-center gap-2">
+                    <User size={14} />
+                    Active Membership
+                  </p>
+                  <h2 className="display-text text-5xl lg:text-6xl mb-4 tracking-tighter">{user.name}</h2>
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 glass text-white text-[10px] font-black uppercase tracking-widest">
+                    <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                    Tier: {currentTier} Status
                   </div>
-                  <div className="text-center md:text-right">
-                    <p className="text-white/70 mb-2 font-medium">Available Points</p>
-                    <p className="text-5xl md:text-6xl font-bold text-accent tracking-tighter">
+                </div>
+
+                <div className="lg:text-right flex flex-col items-start lg:items-end">
+                  <p className="text-white/40 font-black uppercase tracking-[0.3em] text-[10px] mb-2">Artisanal Credits</p>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-7xl lg:text-8xl font-black text-accent tracking-tighter leading-none">
                       {user.points.toLocaleString()}
-                    </p>
-                    <p className="text-white/60 text-sm mt-3 font-medium">
-                      Worth Rs. {(user.points * 1).toLocaleString()} in discounts
-                    </p>
+                    </span>
+                    <span className="text-sm font-black text-white/40 uppercase tracking-widest">PTS</span>
                   </div>
+                  <p className="text-xs font-medium text-white/40 mt-6 italic">
+                    Equates to <span className="text-white font-bold">Rs. {(user.points * 1).toLocaleString()}</span> in luxury credit
+                  </p>
                 </div>
-
-                {/* Progress to Next Tier */}
-                {getNextTier() && (
-                  <div className="mt-8">
-                    <div className="flex justify-between text-sm mb-2">
-                      <span className="text-white/60">Progress to {getNextTier()}</span>
-                      <span className="text-white/60">{getPointsToNextTier()} points to go</span>
-                    </div>
-                    <div className="h-3 bg-white/10 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-[#d4af37] rounded-full transition-all duration-500"
-                        style={{
-                          width: `${Math.min(
-                            ((user.points - loyaltyTiers[currentTier].min) /
-                              (loyaltyTiers[getNextTier()!].min - loyaltyTiers[currentTier].min)) *
-                            100,
-                            100
-                          )}%`,
-                        }}
-                      />
-                    </div>
-                  </div>
-                )}
               </div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-gray-100 bg-gray-50/50">
-                <div className="p-8 text-center group">
-                  <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:-translate-y-1 transition-transform">
-                    <Percent className="text-accent" size={24} />
+              {/* Progress Bar */}
+              {getNextTier() && (
+                <div className="mt-16 pt-12 border-t border-white/10 relative z-10">
+                  <div className="flex justify-between items-end mb-4">
+                    <div className="flex flex-col gap-1">
+                      <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Next Evolution</span>
+                      <span className="text-lg font-black text-white uppercase">{getNextTier()} Status</span>
+                    </div>
+                    <span className="text-xs font-medium text-white/40 italic">
+                      <span className="text-accent font-black not-italic">{getPointsToNextTier()}</span> credits remaining
+                    </span>
                   </div>
-                  <p className="text-3xl font-black text-primary mb-1">{currentDiscount}%</p>
-                  <p className="text-xs font-bold text-foreground/50 uppercase tracking-widest">Current Discount</p>
-                </div>
-                <div className="p-8 text-center group">
-                  <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:-translate-y-1 transition-transform">
-                    <TrendingUp className="text-accent" size={24} />
+                  <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{
+                        width: `${Math.min(
+                          ((user.points - loyaltyTiers[currentTier].min) /
+                            (loyaltyTiers[getNextTier()!].min - loyaltyTiers[currentTier].min)) *
+                          100,
+                          100
+                        )}%`
+                      }}
+                      className="h-full bg-accent rounded-full"
+                    />
                   </div>
-                  <p className="text-3xl font-black text-primary mb-1">
-                    {loyaltyTiers[currentTier].pointMultiplier}x
-                  </p>
-                  <p className="text-xs font-bold text-foreground/50 uppercase tracking-widest">Point Multiplier</p>
                 </div>
-                <div className="p-8 text-center group">
-                  <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:-translate-y-1 transition-transform">
-                    <ShoppingBag className="text-accent" size={24} />
-                  </div>
-                  <p className="text-3xl font-black text-primary mb-1">{user.totalPurchases}</p>
-                  <p className="text-xs font-bold text-foreground/50 uppercase tracking-widest">Total Orders</p>
-                </div>
-                <div className="p-8 text-center group">
-                  <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:-translate-y-1 transition-transform">
-                    <Clock className="text-accent" size={24} />
-                  </div>
-                  <p className="text-xl font-black text-primary mb-1 mt-2">
-                    {new Date(user.joinDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
-                  </p>
-                  <p className="text-xs font-bold text-foreground/50 uppercase tracking-widest">Member Since</p>
-                </div>
-              </div>
+              )}
             </motion.div>
 
-            {/* Transaction History */}
+            {/* Premium Stat Grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                { label: "Privilege Rate", val: `${currentDiscount}%`, icon: Percent, sub: "Direct Discount" },
+                { label: "Amplifier", val: `${loyaltyTiers[currentTier].pointMultiplier}x`, icon: TrendingUp, sub: "Point Multiplier" },
+                { label: "Acquisitions", val: user.totalPurchases, icon: ShoppingBag, sub: "Total Lifecycle" },
+                { label: "Tenure", val: new Date(user.joinDate).getFullYear(), icon: Clock, sub: "Member Since" }
+              ].map((stat, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-black/[0.02] border border-black/5 group hover:bg-[#1A1A1A] transition-all duration-700"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-primary group-hover:bg-accent group-hover:text-primary transition-all duration-500 mb-6">
+                    <stat.icon size={20} />
+                  </div>
+                  <p className="text-3xl font-black text-primary group-hover:text-white transition-colors mb-2 tracking-tighter">{stat.val}</p>
+                  <p className="text-[10px] font-black text-foreground/40 group-hover:text-accent uppercase tracking-widest transition-colors mb-1">{stat.label}</p>
+                  <p className="text-[9px] font-medium text-foreground/30 group-hover:text-white/30 italic transition-colors">{stat.sub}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Editorial Transaction History */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="bg-white rounded-[2rem] shadow-xl p-8"
+              className="bg-white p-12 rounded-[3.5rem] shadow-2xl shadow-black/[0.04] border border-black/5"
             >
-              <h3 className="text-2xl font-black text-primary mb-6">Points History</h3>
+              <h3 className="heading-luxury text-xl text-primary mb-12 uppercase">Chronicle of Credit</h3>
               {transactions.length > 0 ? (
-                <div className="space-y-4">
-                  {transactions.slice(0, 10).map((transaction) => (
-                    <div
-                      key={transaction.id}
-                      className="flex items-center justify-between p-5 bg-gray-50 rounded-2xl mb-4 border border-black/5"
-                    >
-                      <div>
-                        <p className="font-bold text-primary text-lg">{transaction.description}</p>
-                        <p className="text-xs font-bold uppercase tracking-wider text-foreground/50 mt-1">
-                          {new Date(transaction.date).toLocaleDateString()}
+                <div className="space-y-6">
+                  {transactions.slice(0, 10).map((transaction, i) => (
+                    <div key={i} className="flex items-center justify-between py-6 border-b border-black/5 last:border-0 group">
+                      <div className="flex gap-6 items-center">
+                        <div className="w-10 h-10 rounded-full bg-[#F9F9F9] flex items-center justify-center text-primary font-black text-[10px] group-hover:bg-accent group-hover:text-primary transition-all">
+                          {transaction.type === 'earned' ? '+' : '-'}
+                        </div>
+                        <div>
+                          <p className="text-sm font-black text-primary uppercase tracking-tight">{transaction.description}</p>
+                          <p className="text-[10px] font-bold text-foreground/30 uppercase tracking-[0.2em] mt-1">{new Date(transaction.date).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className={`text-xl font-black tracking-tighter ${transaction.type === 'earned' ? 'text-green-600' : 'text-red-500'}`}>
+                          {transaction.type === 'earned' ? '+' : '-'}{transaction.points} <span className="text-[10px] font-bold uppercase tracking-widest opacity-40 ml-1">pts</span>
                         </p>
                       </div>
-                      <span
-                        className={`font-bold ${transaction.type === 'earned' ? 'text-green-600' : 'text-red-600'
-                          }`}
-                      >
-                        {transaction.type === 'earned' ? '+' : '-'}
-                        {transaction.points} pts
-                      </span>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-center text-gray-500 py-8">
-                  No transactions yet. Start shopping to earn points!
-                </p>
+                <div className="text-center py-20 opacity-20">
+                  <ShoppingBag size={64} className="mx-auto mb-6" />
+                  <p className="text-sm font-black uppercase tracking-[0.3em]">No Heritage Recorded</p>
+                </div>
               )}
             </motion.div>
           </div>
         ) : (
-          /* Not Logged In View */
-          <div className="space-y-12">
-            {/* Sign Up Card */}
+          /* Premium Recruitment View */
+          <div className="space-y-24">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-[2rem] shadow-2xl shadow-primary/5 p-10 max-w-xl mx-auto border border-black/5"
+              className="bg-white rounded-[3.5rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.06)] p-16 max-w-2xl mx-auto border border-black/5 overflow-hidden relative"
             >
-              {showSignUp ? (
-                <form onSubmit={handleSignUp} className="space-y-6">
-                  <h3 className="text-2xl font-bold text-[#1a1a2e] text-center">
-                    Join Our Loyalty Program
-                  </h3>
-                  <p className="text-gray-600 text-center">
-                    Sign up now and get 100 bonus points!
-                  </p>
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-accent via-white to-accent opacity-50" />
 
-                  <div>
-                    <label className="block text-sm font-bold text-primary mb-2 uppercase tracking-wide">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-5 py-4 rounded-full border border-black/10 focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-medium text-lg bg-gray-50 focus:bg-white"
-                      placeholder="Enter your name"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-bold text-primary mb-2 uppercase tracking-wide">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-5 py-4 rounded-full border border-black/10 focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-medium text-lg bg-gray-50 focus:bg-white"
-                      placeholder="Enter your email"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-bold text-primary mb-2 uppercase tracking-wide">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-5 py-4 rounded-full border border-black/10 focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-medium text-lg bg-gray-50 focus:bg-white"
-                      placeholder="Enter your phone"
-                    />
-                  </div>
-
-                  <button type="submit" className="w-full btn-luxury">
-                    Join Now & Get 100 Points
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setShowSignUp(false)}
-                    className="w-full py-3 text-gray-500 hover:text-gray-700"
+              <AnimatePresence mode="wait">
+                {showSignUp ? (
+                  <motion.form
+                    key="form"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    onSubmit={handleSignUp}
+                    className="space-y-10"
                   >
-                    Cancel
-                  </button>
-                </form>
-              ) : (
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-[#d4af37]/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Gift className="text-[#d4af37]" size={40} />
-                  </div>
-                  <h3 className="text-2xl font-bold text-[#1a1a2e] mb-3">
-                    Join Our Loyalty Program
-                  </h3>
-                  <p className="text-gray-600 mb-6">
-                    Start earning points on every purchase and unlock exclusive discounts!
-                  </p>
-                  <button onClick={() => setShowSignUp(true)} className="btn-luxury">
-                    Sign Up Now
-                  </button>
-                </div>
-              )}
+                    <div className="text-center">
+                      <h3 className="heading-luxury text-2xl text-primary uppercase mb-3">Enlistment</h3>
+                      <p className="text-xs font-medium text-foreground/40 italic">Procure 100 artisanal credits upon induction</p>
+                    </div>
+
+                    <div className="space-y-8">
+                      {[
+                        { label: "Legal Name", type: "text", key: "name", placeholder: "Your name" },
+                        { label: "Email Coordinate", type: "email", key: "email", placeholder: "Email address" },
+                        { label: "Mobile Conduit", type: "tel", key: "phone", placeholder: "Phone number" }
+                      ].map((field) => (
+                        <div key={field.key} className="flex flex-col gap-3">
+                          <label className="text-[10px] font-black text-primary uppercase tracking-[0.2em] ml-4">{field.label}</label>
+                          <input
+                            type={field.type}
+                            required
+                            value={formData[field.key as keyof typeof formData]}
+                            onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
+                            className="w-full bg-[#F9F9F9] px-8 py-5 rounded-full border border-transparent focus:bg-white focus:border-accent outline-none transition-all font-bold text-lg"
+                            placeholder={field.placeholder}
+                          />
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex flex-col gap-4 pt-6">
+                      <button type="submit" className="btn-premium grouping shadow-2xl shadow-primary/20">
+                        Initiate Membership
+                        <MoveRight size={20} className="transition-transform group-hover:translate-x-2" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setShowSignUp(false)}
+                        className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/30 hover:text-primary transition-colors py-4"
+                      >
+                        Decline Induction
+                      </button>
+                    </div>
+                  </motion.form>
+                ) : (
+                  <motion.div
+                    key="cta"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    className="text-center"
+                  >
+                    <div className="w-24 h-24 bg-accent/10 rounded-[2rem] flex items-center justify-center mx-auto mb-10 overflow-hidden group">
+                      <Gift className="text-accent group-hover:scale-125 transition-transform duration-700" size={40} />
+                    </div>
+                    <h3 className="display-text text-4xl text-primary mb-6 leading-none">The Inner <br /> Circle</h3>
+                    <p className="text-base text-foreground/50 mb-12 max-w-sm mx-auto font-medium leading-relaxed italic">
+                      Transcend the ordinary. Join the assembly of elite patrons and access unrivaled benefits.
+                    </p>
+                    <button onClick={() => setShowSignUp(true)} className="btn-premium grouping shadow-2xl shadow-primary/20 scale-110">
+                      Request Induction
+                      <MoveRight size={20} className="transition-transform group-hover:translate-x-2" />
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
 
-            {/* Tiers Explanation */}
+            {/* Membership Hierarchy */}
             <div>
-              <h3 className="text-3xl md:text-4xl font-black text-primary text-center mb-12 tracking-tight">
-                Membership Tiers
-              </h3>
-              <div className="grid md:grid-cols-4 gap-6">
+              <div className="text-center mb-20">
+                <span className="text-accent font-black tracking-[0.5em] uppercase text-[10px] mb-4 block">Hierarchy</span>
+                <h3 className="heading-luxury text-4xl text-primary uppercase">The Evolution of Status</h3>
+              </div>
+
+              <div className="grid md:grid-cols-4 gap-8">
                 {tierInfo.map((tier, index) => (
                   <motion.div
                     key={tier.tier}
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-white rounded-[2rem] shadow-xl shadow-black/5 border border-black/5 p-8 text-center"
+                    className="bg-white rounded-[3rem] shadow-xl shadow-black/[0.03] border border-black/5 p-10 flex flex-col group hover:bg-[#1A1A1A] transition-all duration-700"
                   >
                     <div
-                      className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner"
+                      className="w-16 h-16 rounded-[1.5rem] flex items-center justify-center mb-8 shadow-inner transition-transform duration-700 group-hover:rotate-12 group-hover:scale-110"
                       style={{ backgroundColor: `${tier.color}15` }}
                     >
-                      <tier.icon size={36} style={{ color: tier.color }} />
+                      <tier.icon size={28} style={{ color: tier.color }} />
                     </div>
-                    <h4 className="text-2xl font-black text-primary capitalize mb-2">
+                    <h4 className="heading-luxury text-2xl text-primary group-hover:text-white uppercase transition-colors mb-2">
                       {tier.tier}
                     </h4>
-                    <p className="text-sm text-gray-500 mb-4">
-                      {tier.minPoints.toLocaleString()}+ Points
+                    <p className="text-[10px] font-black text-foreground/30 group-hover:text-accent uppercase tracking-[0.2em] mb-8 transition-colors">
+                      {tier.minPoints.toLocaleString()}+ Credits
                     </p>
-                    <div className="space-y-2 text-sm">
-                      <p className="text-[#d4af37] font-semibold">
-                        {loyaltyTiers[tier.tier as keyof typeof loyaltyTiers].discount}% Discount
-                      </p>
-                      <p className="text-gray-600">
-                        {loyaltyTiers[tier.tier as keyof typeof loyaltyTiers].pointMultiplier}x Points
-                      </p>
+
+                    <div className="mt-auto space-y-4 pt-8 border-t border-black/5 group-hover:border-white/10 transition-colors">
+                      <div className="flex justify-between items-center">
+                        <span className="text-[10px] font-black text-foreground/40 uppercase tracking-widest">Privilege</span>
+                        <span className="text-sm font-black text-primary group-hover:text-accent uppercase">{loyaltyTiers[tier.tier as keyof typeof loyaltyTiers].discount}% OFF</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-[10px] font-black text-foreground/40 uppercase tracking-widest">Growth</span>
+                        <span className="text-sm font-black text-primary group-hover:text-accent uppercase">{loyaltyTiers[tier.tier as keyof typeof loyaltyTiers].pointMultiplier}X PTS</span>
+                      </div>
                     </div>
                   </motion.div>
                 ))}
               </div>
             </div>
 
-            {/* How It Works */}
-            <div className="bg-primary rounded-[2rem] p-10 md:p-16 shadow-2xl shadow-primary/20">
-              <h3 className="text-3xl md:text-4xl font-black text-white text-center mb-12 tracking-tight">
-                How It Works
-              </h3>
-              <div className="grid md:grid-cols-3 gap-8">
+            {/* Procedural Overview */}
+            <div className="glass-dark rounded-[4rem] p-16 md:p-24 shadow-2xl relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
+              <h3 className="heading-luxury text-3xl md:text-5xl text-white uppercase text-center mb-24 tracking-tighter">The Process</h3>
+              <div className="grid md:grid-cols-3 gap-20">
                 {[
-                  { step: '1', title: 'Sign Up', desc: 'Join for free and get 100 welcome points' },
-                  { step: '2', title: 'Shop & Earn', desc: 'Earn points on every purchase you make' },
-                  { step: '3', title: 'Redeem & Save', desc: 'Use points for discounts on future orders' },
+                  { step: 'I', title: 'Induction', desc: 'Secure your place and receive an immediate credit of 100 artisanal points.' },
+                  { step: 'II', title: 'Acquisition', desc: 'Accumulate points with every precision high-end procurement.' },
+                  { step: 'III', title: 'Evolution', desc: 'Redeem your heritage for unrivaled privileges on future collections.' },
                 ].map((item) => (
-                  <div key={item.step} className="text-center">
-                    <div className="w-12 h-12 bg-[#d4af37] rounded-full flex items-center justify-center mx-auto mb-4 text-[#1a1a2e] font-bold text-xl">
+                  <div key={item.step} className="text-center group">
+                    <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-10 text-primary font-black text-2xl shadow-2xl shadow-accent/20 transition-transform duration-700 group-hover:scale-110">
                       {item.step}
                     </div>
-                    <h4 className="text-lg font-bold text-white mb-2">{item.title}</h4>
-                    <p className="text-white/60">{item.desc}</p>
+                    <h4 className="text-lg font-black text-white uppercase tracking-[0.2em] mb-4">{item.title}</h4>
+                    <p className="text-base text-white/40 font-medium leading-relaxed italic">{item.desc}</p>
                   </div>
                 ))}
               </div>

@@ -1,0 +1,12 @@
+:root {
+    --background: #FAFAFA;
+    --foreground: #0A0A0A;
+    --primary: #0A0A0A;
+    --primary-muted: #1A1A1A;
+    --accent: #D4AF37;
+    --accent-muted: #B4942E;
+    --glass: rgba(255, 255, 255, 0.7);
+    --glass-dark: rgba(10, 10, 10, 0.8);
+    --border: rgba(0, 0, 0, 0.05);
+    --luxury-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+}

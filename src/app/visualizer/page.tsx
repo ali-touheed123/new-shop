@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { Palette, Upload, RotateCcw, Download, Check } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Palette, Upload, RotateCcw, Download, Check, Sparkles, MoveRight, Eye, Layers, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 
 const colorPalettes = [
@@ -28,6 +28,7 @@ export default function VisualizerPage() {
   const [selectedRoom, setSelectedRoom] = useState(presetRooms[0]);
   const [customImage, setCustomImage] = useState<string | null>(null);
   const [intensity, setIntensity] = useState(50);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,212 +50,177 @@ export default function VisualizerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero */}
-      <div className="bg-primary py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div className="min-h-screen bg-white">
+      {/* Immersive Background Canvas */}
+      <div className="fixed inset-0 z-0">
+        <Image
+          src={customImage || selectedRoom.image}
+          alt="Canvas"
+          fill
+          className="object-cover transition-opacity duration-1000"
+        />
+        <div
+          className="absolute inset-0 mix-blend-multiply transition-all duration-1000 ease-[0.16, 1, 0.3, 1]"
+          style={{ backgroundColor: selectedColor, opacity: intensity / 100 }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
+      </div>
+
+      {/* Floating UI Layer */}
+      <div className="relative z-10 w-full min-h-screen flex flex-col justify-between p-8 pointer-events-none">
+
+        {/* Top Branding & Exit */}
+        <div className="flex justify-between items-start pointer-events-auto">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center justify-center w-20 h-20 bg-accent rounded-full mb-8 shadow-lg"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="glass px-8 py-5 rounded-[2rem] border-white/40 flex items-center gap-4"
           >
-            <Palette className="text-primary" size={40} />
+            <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-accent">
+              <Palette size={20} />
+            </div>
+            <div>
+              <h1 className="text-sm font-black text-primary uppercase tracking-[0.2em]">Color Atelier</h1>
+              <p className="text-[9px] font-bold text-primary/40 uppercase tracking-widest">Digital Projection Studio</p>
+            </div>
           </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex gap-4"
           >
-            Color Visualizer
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            <button
+              onClick={resetVisualizer}
+              className="w-14 h-14 glass rounded-full flex items-center justify-center text-primary/40 hover:text-primary transition-all duration-500 border-white/40"
+            >
+              <RotateCcw size={20} />
+            </button>
+            <button className="btn-premium px-8 grouping shadow-2xl">
+              Save Composition
+              <Download size={18} />
+            </button>
+          </motion.div>
+        </div>
+
+        {/* Bottom Control Hub */}
+        <div className="w-full flex flex-col lg:flex-row gap-8 items-end justify-between pointer-events-auto">
+
+          {/* Palette Selection (Large Pill) */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-white/70 max-w-2xl mx-auto text-lg leading-relaxed"
+            className="glass px-10 py-8 rounded-[3.5rem] border-white/40 shadow-2xl flex-1 max-w-4xl"
           >
-            See how different colors look on your walls before making a decision.
-            Upload your room photo or use our presets.
-          </motion.p>
+            <div className="flex items-center justify-between mb-8">
+              <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em]">Curation: The Muse Collection</span>
+              <div className="flex gap-2">
+                <span className="text-[10px] font-black text-accent uppercase tracking-widest">{selectedColor}</span>
+                <div className="w-4 h-4 rounded-full border border-black/10" style={{ backgroundColor: selectedColor }} />
+              </div>
+            </div>
+
+            <div className="flex gap-6 overflow-x-auto pb-4 custom-scrollbar no-scrollbar">
+              {colorPalettes.flatMap(p => p.colors).slice(0, 20).map((color, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedColor(color)}
+                  className={`relative w-24 h-24 rounded-3xl shrink-0 transition-all duration-500 overflow-hidden ${selectedColor === color ? 'scale-110 shadow-2xl ring-4 ring-white' : 'hover:scale-105 opacity-80'}`}
+                  style={{ backgroundColor: color }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent" />
+                  {selectedColor === color && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Check className="text-white" size={24} />
+                    </div>
+                  )}
+                </button>
+              ))}
+              <button className="w-24 h-24 rounded-3xl shrink-0 glass border-dashed border-2 border-primary/20 flex flex-col items-center justify-center text-primary/40 hover:text-primary hover:border-accent transition-all">
+                <Plus size={24} />
+                <span className="text-[9px] font-black uppercase tracking-widest mt-2">Custom</span>
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Sidebar Toggle & Contextual View */}
+          <div className="flex flex-col gap-6 w-full lg:w-80">
+
+            {/* Intensity Slider (Luxury Ring) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="glass-dark p-8 rounded-[3rem] shadow-2xl"
+            >
+              <div className="flex justify-between items-center mb-6">
+                <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Luminance</span>
+                <span className="text-xs font-black text-accent">{intensity}%</span>
+              </div>
+              <input
+                type="range"
+                min="10"
+                max="80"
+                value={intensity}
+                onChange={(e) => setIntensity(parseInt(e.target.value))}
+                className="w-full h-1.5 bg-white/10 rounded-full appearance-none cursor-pointer accent-accent"
+              />
+            </motion.div>
+
+            {/* Room Selection (Compact Pills) */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="glass p-8 rounded-[3rem] shadow-2xl border-white/40 h-80 overflow-y-auto no-scrollbar"
+            >
+              <p className="text-[10px] font-black text-primary uppercase tracking-widest mb-6">Select Environment</p>
+              <div className="grid grid-cols-2 gap-4">
+                {presetRooms.map((room) => (
+                  <button
+                    key={room.id}
+                    onClick={() => { setSelectedRoom(room); setCustomImage(null); }}
+                    className={`relative aspect-square rounded-2.5xl overflow-hidden transition-all duration-500 ${selectedRoom.id === room.id && !customImage ? 'ring-4 ring-accent' : 'opacity-60 grayscale hover:grayscale-0 hover:opacity-100'}`}
+                  >
+                    <Image src={room.image} alt={room.name} fill className="object-cover" />
+                  </button>
+                ))}
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="relative aspect-square rounded-2.5xl border-2 border-dashed border-primary/20 flex flex-col items-center justify-center text-primary/40 hover:bg-white transition-all"
+                >
+                  <Upload size={20} />
+                  <span className="text-[8px] font-black uppercase mt-2">Upload</span>
+                  <input type="file" ref={fileInputRef} onChange={handleImageUpload} accept="image/*" className="hidden" />
+                </button>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Preview Panel */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="lg:col-span-2"
-          >
-            <div className="bg-white rounded-[2rem] shadow-xl shadow-black/5 border border-black/5 overflow-hidden">
-              <div className="p-8 border-b border-black/5 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-                  <Palette className="text-accent" size={20} />
-                </div>
-                <h2 className="text-2xl font-black text-primary tracking-tight">Room Preview</h2>
-              </div>
-
-              {/* Image Preview with Color Overlay */}
-              <div className="relative aspect-video">
-                <Image
-                  src={customImage || selectedRoom.image}
-                  alt="Room Preview"
-                  fill
-                  className="object-cover"
-                />
-                {/* Color Overlay */}
-                <div
-                  className="absolute inset-0 mix-blend-multiply transition-opacity duration-300"
-                  style={{
-                    backgroundColor: selectedColor,
-                    opacity: intensity / 100,
-                  }}
-                />
-              </div>
-
-              {/* Room Presets */}
-              <div className="p-8">
-                <h3 className="font-bold text-primary mb-6 text-lg">Choose a Room</h3>
-                <div className="grid grid-cols-4 gap-4">
-                  {presetRooms.map((room) => (
-                    <button
-                      key={room.id}
-                      onClick={() => {
-                        setSelectedRoom(room);
-                        setCustomImage(null);
-                      }}
-                      className={`relative aspect-video rounded-[1.5rem] overflow-hidden border-[3px] transition-all hover:-translate-y-1 hover:shadow-lg ${selectedRoom.id === room.id && !customImage
-                        ? 'border-accent shadow-xl shadow-accent/20'
-                        : 'border-transparent hover:border-black/5'
-                        }`}
-                    >
-                      <Image
-                        src={room.image}
-                        alt={room.name}
-                        fill
-                        className="object-cover"
-                      />
-                      {selectedRoom.id === room.id && !customImage && (
-                        <div className="absolute inset-0 bg-accent/20 flex items-center justify-center backdrop-blur-[2px]">
-                          <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
-                            <Check className="text-accent font-black" size={20} />
-                          </div>
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-
-                {/* Upload Custom Image */}
-                <div className="mt-4 flex gap-4">
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleImageUpload}
-                    accept="image/*"
-                    className="hidden"
-                  />
-                  <button
-                    onClick={() => fileInputRef.current?.click()}
-                    className="flex-1 flex items-center justify-center gap-2 py-4 border-2 border-dashed border-gray-300 rounded-full hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-colors font-bold text-primary"
-                  >
-                    <Upload size={20} />
-                    Upload Your Room Photo
-                  </button>
-                  <button
-                    onClick={resetVisualizer}
-                    className="w-14 h-14 flex items-center justify-center bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
-                  >
-                    <RotateCcw size={20} className="text-primary" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Color Selection Panel */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="space-y-6"
-          >
-            {/* Selected Color */}
-            <div className="bg-white rounded-[2rem] shadow-xl shadow-black/5 p-8 border border-black/5">
-              <h3 className="font-bold text-primary mb-6 text-lg">Selected Color</h3>
-              <div className="flex items-center gap-6">
-                <div
-                  className="w-24 h-24 rounded-full shadow-inner border-[6px] border-white ring-1 ring-black/5"
-                  style={{ backgroundColor: selectedColor }}
-                />
-                <div>
-                  <input
-                    type="color"
-                    value={selectedColor}
-                    onChange={(e) => setSelectedColor(e.target.value)}
-                    className="w-full h-10 rounded cursor-pointer"
-                  />
-                  <p className="text-sm text-gray-500 mt-1 uppercase">{selectedColor}</p>
-                </div>
-              </div>
-
-              {/* Intensity Slider */}
-              <div className="mt-6">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm font-medium text-gray-700">Color Intensity</span>
-                  <span className="text-sm text-gray-500">{intensity}%</span>
-                </div>
-                <input
-                  type="range"
-                  min="10"
-                  max="80"
-                  value={intensity}
-                  onChange={(e) => setIntensity(parseInt(e.target.value))}
-                  className="w-full accent-[#d4af37]"
-                />
-              </div>
-            </div>
-
-            {/* Color Palettes */}
-            <div className="bg-white rounded-[2rem] shadow-xl shadow-black/5 p-8 border border-black/5">
-              <h3 className="font-bold text-primary mb-6 text-lg">Color Palettes</h3>
-              <div className="space-y-6 max-h-[400px] overflow-y-auto pr-4 custom-scrollbar">
-                {colorPalettes.map((palette) => (
-                  <div key={palette.name}>
-                    <p className="text-xs font-bold text-foreground/50 uppercase tracking-widest mb-3">{palette.name}</p>
-                    <div className="flex gap-2">
-                      {palette.colors.map((color) => (
-                        <button
-                          key={color}
-                          onClick={() => setSelectedColor(color)}
-                          className={`flex-1 h-12 rounded-full transition-all hover:scale-110 shadow-sm ${selectedColor === color
-                            ? 'ring-4 ring-primary ring-offset-2 scale-110'
-                            : ''
-                            }`}
-                          style={{ backgroundColor: color }}
-                          title={color}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Tips */}
-            <div className="bg-primary rounded-[2rem] p-8 text-white shadow-xl shadow-primary/10">
-              <h3 className="font-bold text-xl mb-6">Visualizer Tips</h3>
-              <ul className="space-y-2 text-white/70 text-sm">
-                <li>• Upload a well-lit photo for best results</li>
-                <li>• Try multiple colors before deciding</li>
-                <li>• Consider room lighting when choosing</li>
-                <li>• Test colors in both day and night lighting</li>
-              </ul>
-            </div>
-          </motion.div>
-        </div>
+      {/* Editorial Watermark */}
+      <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-20 pointer-events-none opacity-20">
+        <p className="text-[10px] font-medium text-white uppercase tracking-[1em]">Tawakkal Digital Studio &copy; 2026</p>
       </div>
     </div>
+  );
+}
+
+function Plus(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M5 12h14" />
+      <path d="M12 5v14" />
+    </svg>
   );
 }
