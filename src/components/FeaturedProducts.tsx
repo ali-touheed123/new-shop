@@ -7,10 +7,10 @@ import ProductCard from './ProductCard';
 import { products } from '@/lib/data';
 
 export default function FeaturedProducts() {
-  const featuredProducts = products.slice(0, 8);
+  const featuredProducts = products.slice(0, 12);
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
@@ -19,7 +19,7 @@ export default function FeaturedProducts() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="text-accent font-medium tracking-wider uppercase text-sm"
+              className="inline-block bg-primary/5 text-primary font-bold tracking-wider uppercase text-xs px-4 py-2 rounded-full mb-6"
             >
               Best Sellers
             </motion.span>
@@ -28,7 +28,7 @@ export default function FeaturedProducts() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl md:text-5xl font-bold text-primary mt-3 tracking-tight"
+              className="text-4xl md:text-5xl lg:text-6xl font-black text-primary mt-3 tracking-tight"
             >
               Featured Products
             </motion.h2>
@@ -41,10 +41,12 @@ export default function FeaturedProducts() {
           >
             <Link
               href="/products"
-              className="inline-flex items-center gap-2 text-accent font-medium hover:text-accent-light transition-all mt-4 md:mt-0 group"
+              className="inline-flex items-center gap-3 text-primary font-bold hover:text-accent transition-colors mt-4 md:mt-0 group"
             >
-              View All Products
-              <ArrowRight size={20} className="transform transition-transform group-hover:translate-x-1" />
+              <span className="uppercase tracking-wider text-sm">View All Products</span>
+              <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center transform transition-transform duration-300 group-hover:translate-x-2 group-hover:bg-accent group-hover:text-primary">
+                <ArrowRight size={20} />
+              </div>
             </Link>
           </motion.div>
         </div>

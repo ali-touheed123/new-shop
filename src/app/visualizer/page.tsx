@@ -87,9 +87,12 @@ export default function VisualizerPage() {
             animate={{ opacity: 1, y: 0 }}
             className="lg:col-span-2"
           >
-            <div className="bg-white rounded-2xl shadow-xl shadow-black/5 border border-black/5 overflow-hidden">
-              <div className="p-8 border-b border-black/5">
-                <h2 className="text-xl font-bold text-primary">Room Preview</h2>
+            <div className="bg-white rounded-[2rem] shadow-xl shadow-black/5 border border-black/5 overflow-hidden">
+              <div className="p-8 border-b border-black/5 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+                  <Palette className="text-accent" size={20} />
+                </div>
+                <h2 className="text-2xl font-black text-primary tracking-tight">Room Preview</h2>
               </div>
 
               {/* Image Preview with Color Overlay */}
@@ -112,7 +115,7 @@ export default function VisualizerPage() {
 
               {/* Room Presets */}
               <div className="p-8">
-                <h3 className="font-semibold text-primary mb-5">Choose a Room</h3>
+                <h3 className="font-bold text-primary mb-6 text-lg">Choose a Room</h3>
                 <div className="grid grid-cols-4 gap-4">
                   {presetRooms.map((room) => (
                     <button
@@ -121,9 +124,9 @@ export default function VisualizerPage() {
                         setSelectedRoom(room);
                         setCustomImage(null);
                       }}
-                      className={`relative aspect-video rounded-xl overflow-hidden border-2 transition-all ${selectedRoom.id === room.id && !customImage
-                          ? 'border-accent ring-2 ring-accent/30'
-                          : 'border-transparent hover:border-black/10'
+                      className={`relative aspect-video rounded-[1.5rem] overflow-hidden border-[3px] transition-all hover:-translate-y-1 hover:shadow-lg ${selectedRoom.id === room.id && !customImage
+                        ? 'border-accent shadow-xl shadow-accent/20'
+                        : 'border-transparent hover:border-black/5'
                         }`}
                     >
                       <Image
@@ -133,8 +136,10 @@ export default function VisualizerPage() {
                         className="object-cover"
                       />
                       {selectedRoom.id === room.id && !customImage && (
-                        <div className="absolute inset-0 bg-accent/20 flex items-center justify-center">
-                          <Check className="text-primary font-bold" size={24} />
+                        <div className="absolute inset-0 bg-accent/20 flex items-center justify-center backdrop-blur-[2px]">
+                          <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
+                            <Check className="text-accent font-black" size={20} />
+                          </div>
                         </div>
                       )}
                     </button>
@@ -152,16 +157,16 @@ export default function VisualizerPage() {
                   />
                   <button
                     onClick={() => fileInputRef.current?.click()}
-                    className="flex-1 flex items-center justify-center gap-2 py-3 border-2 border-dashed border-gray-300 rounded-xl hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-colors"
+                    className="flex-1 flex items-center justify-center gap-2 py-4 border-2 border-dashed border-gray-300 rounded-full hover:border-[#d4af37] hover:bg-[#d4af37]/5 transition-colors font-bold text-primary"
                   >
                     <Upload size={20} />
                     Upload Your Room Photo
                   </button>
                   <button
                     onClick={resetVisualizer}
-                    className="px-4 py-3 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"
+                    className="w-14 h-14 flex items-center justify-center bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
                   >
-                    <RotateCcw size={20} />
+                    <RotateCcw size={20} className="text-primary" />
                   </button>
                 </div>
               </div>
@@ -176,11 +181,11 @@ export default function VisualizerPage() {
             className="space-y-6"
           >
             {/* Selected Color */}
-            <div className="bg-white rounded-2xl shadow-xl p-6">
-              <h3 className="font-semibold text-gray-700 mb-4">Selected Color</h3>
-              <div className="flex items-center gap-4">
+            <div className="bg-white rounded-[2rem] shadow-xl shadow-black/5 p-8 border border-black/5">
+              <h3 className="font-bold text-primary mb-6 text-lg">Selected Color</h3>
+              <div className="flex items-center gap-6">
                 <div
-                  className="w-20 h-20 rounded-xl shadow-inner border-4 border-white"
+                  className="w-24 h-24 rounded-full shadow-inner border-[6px] border-white ring-1 ring-black/5"
                   style={{ backgroundColor: selectedColor }}
                 />
                 <div>
@@ -212,20 +217,20 @@ export default function VisualizerPage() {
             </div>
 
             {/* Color Palettes */}
-            <div className="bg-white rounded-2xl shadow-xl p-6">
-              <h3 className="font-semibold text-gray-700 mb-4">Color Palettes</h3>
-              <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+            <div className="bg-white rounded-[2rem] shadow-xl shadow-black/5 p-8 border border-black/5">
+              <h3 className="font-bold text-primary mb-6 text-lg">Color Palettes</h3>
+              <div className="space-y-6 max-h-[400px] overflow-y-auto pr-4 custom-scrollbar">
                 {colorPalettes.map((palette) => (
                   <div key={palette.name}>
-                    <p className="text-xs text-gray-500 mb-2">{palette.name}</p>
-                    <div className="flex gap-1">
+                    <p className="text-xs font-bold text-foreground/50 uppercase tracking-widest mb-3">{palette.name}</p>
+                    <div className="flex gap-2">
                       {palette.colors.map((color) => (
                         <button
                           key={color}
                           onClick={() => setSelectedColor(color)}
-                          className={`flex-1 h-10 rounded transition-transform hover:scale-110 ${selectedColor === color
-                              ? 'ring-2 ring-[#1a1a2e] ring-offset-2'
-                              : ''
+                          className={`flex-1 h-12 rounded-full transition-all hover:scale-110 shadow-sm ${selectedColor === color
+                            ? 'ring-4 ring-primary ring-offset-2 scale-110'
+                            : ''
                             }`}
                           style={{ backgroundColor: color }}
                           title={color}
@@ -238,8 +243,8 @@ export default function VisualizerPage() {
             </div>
 
             {/* Tips */}
-            <div className="bg-[#1a1a2e] rounded-2xl p-6 text-white">
-              <h3 className="font-bold mb-3">Visualizer Tips</h3>
+            <div className="bg-primary rounded-[2rem] p-8 text-white shadow-xl shadow-primary/10">
+              <h3 className="font-bold text-xl mb-6">Visualizer Tips</h3>
               <ul className="space-y-2 text-white/70 text-sm">
                 <li>• Upload a well-lit photo for best results</li>
                 <li>• Try multiple colors before deciding</li>

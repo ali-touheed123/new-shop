@@ -69,7 +69,7 @@ export default function CartPage() {
                 className="bg-white rounded-xl shadow-sm p-4 flex gap-4"
               >
                 {/* Product Image */}
-                <div className="relative w-24 h-24 flex-shrink-0 bg-gray-100 rounded-lg overflow-hidden">
+                <div className="relative w-32 h-32 flex-shrink-0 bg-gray-50 rounded-2xl overflow-hidden border border-black/5">
                   <Image
                     src={item.product.image}
                     alt={item.product.name}
@@ -94,14 +94,14 @@ export default function CartPage() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                        className="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                        className="w-10 h-10 flex items-center justify-center bg-gray-50 rounded-full hover:bg-gray-200 transition-colors border border-black/5"
                       >
                         <Minus size={16} />
                       </button>
-                      <span className="w-8 text-center font-semibold">{item.quantity}</span>
+                      <span className="w-8 text-center font-bold text-lg">{item.quantity}</span>
                       <button
                         onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                        className="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                        className="w-10 h-10 flex items-center justify-center bg-gray-50 rounded-full hover:bg-gray-200 transition-colors border border-black/5"
                       >
                         <Plus size={16} />
                       </button>
@@ -109,14 +109,14 @@ export default function CartPage() {
 
                     {/* Price & Remove */}
                     <div className="flex items-center gap-4">
-                      <span className="font-bold text-[#1a1a2e]">
+                      <span className="font-black text-xl text-primary">
                         Rs. {(item.product.price * item.quantity).toLocaleString()}
                       </span>
                       <button
                         onClick={() => removeFromCart(item.product.id)}
-                        className="text-red-500 hover:text-red-700 transition-colors"
+                        className="text-foreground/40 hover:text-red-500 transition-colors p-2"
                       >
-                        <Trash2 size={18} />
+                        <Trash2 size={20} />
                       </button>
                     </div>
                   </div>
@@ -138,39 +138,39 @@ export default function CartPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-xl shadow-lg shadow-black/5 border border-black/5 p-8 sticky top-32"
+              className="bg-white rounded-[2rem] shadow-xl shadow-black/5 border border-black/5 p-8 sticky top-32"
             >
-              <h2 className="text-xl font-bold text-primary mb-6">Order Summary</h2>
+              <h2 className="text-2xl font-black text-primary mb-8">Order Summary</h2>
 
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Subtotal</span>
-                  <span className="font-semibold">Rs. {subtotal.toLocaleString()}</span>
+                  <span className="text-gray-600 font-medium">Subtotal</span>
+                  <span className="font-bold">Rs. {subtotal.toLocaleString()}</span>
                 </div>
                 {user && discount > 0 && (
-                  <div className="flex justify-between text-green-600">
+                  <div className="flex justify-between text-green-600 font-medium">
                     <span>Member Discount ({getDiscount()}%)</span>
                     <span>-Rs. {discount.toLocaleString()}</span>
                   </div>
                 )}
-                <div className="flex justify-between text-[#d4af37]">
-                  <span className="flex items-center gap-1">
+                <div className="flex justify-between text-accent font-medium">
+                  <span className="flex items-center gap-2">
                     <Gift size={16} />
                     Points to Earn
                   </span>
                   <span>+{totalPoints}</span>
                 </div>
-                <hr />
-                <div className="flex justify-between text-lg font-bold">
-                  <span>Total</span>
-                  <span>Rs. {total.toLocaleString()}</span>
+                <div className="h-px bg-black/5 my-4" />
+                <div className="flex justify-between items-end">
+                  <span className="text-lg font-bold">Total</span>
+                  <span className="text-3xl font-black text-primary hover:text-accent transition-colors">Rs. {total.toLocaleString()}</span>
                 </div>
               </div>
 
               {!user && (
-                <div className="bg-[#d4af37]/10 border border-[#d4af37] rounded-lg p-4 mb-6">
-                  <p className="text-sm text-[#1a1a2e]">
-                    <Link href="/loyalty" className="font-semibold text-[#d4af37] hover:underline">
+                <div className="bg-accent/5 border border-accent/20 rounded-2xl p-4 mb-8">
+                  <p className="text-sm font-medium text-primary">
+                    <Link href="/loyalty" className="font-bold text-accent hover:underline">
                       Join our loyalty program
                     </Link>{' '}
                     to earn {totalPoints} points on this order!

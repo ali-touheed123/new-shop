@@ -64,43 +64,50 @@ body {
 .btn-luxury {
   background: var(--luxury-dark);
   color: #ffffff;
-  font-weight: 500;
-  padding: 0 24px;
-  height: 48px;
-  border-radius: 8px;
+  font-weight: 600;
+  padding: 0 32px;
+  height: 56px;
+  border-radius: 9999px;
+  /* Pill shape */
+  font-size: 1.125rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
   cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
 .btn-luxury:hover {
   background: var(--primary-light);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .btn-outline-luxury {
   background: transparent;
   color: var(--luxury-dark);
-  border: 1px solid var(--luxury-dark);
-  font-weight: 500;
-  padding: 0 24px;
-  height: 48px;
-  border-radius: 8px;
+  border: 2px solid var(--luxury-dark);
+  font-weight: 600;
+  padding: 0 32px;
+  height: 56px;
+  border-radius: 9999px;
+  /* Pill shape */
+  font-size: 1.125rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
 .btn-outline-luxury:hover {
-  background: var(--background);
-  color: var(--primary);
+  background: var(--primary);
+  color: white;
   border-color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* WhatsApp Button */
@@ -126,15 +133,17 @@ body {
 /* Card Hover Effects */
 .card-luxury {
   background: white;
-  border-radius: 12px;
+  border-radius: 24px;
+  /* Much softer corners */
   overflow: hidden;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.02);
 }
 
 .card-luxury:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
 /* Gold Gradient Text */
@@ -150,6 +159,7 @@ body {
   0% {
     background-position: -1000px 0;
   }
+
   100% {
     background-position: 1000px 0;
   }
@@ -163,9 +173,12 @@ body {
 
 /* Floating Animation */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -177,9 +190,12 @@ body {
 
 /* Pulse Gold */
 @keyframes pulseGold {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
   }
+
   50% {
     box-shadow: 0 0 0 15px rgba(212, 175, 55, 0);
   }

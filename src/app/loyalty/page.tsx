@@ -92,7 +92,7 @@ export default function LoyaltyPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-2xl shadow-xl shadow-black/5 border border-black/5 overflow-hidden"
+              className="bg-white rounded-[2rem] shadow-xl shadow-black/5 border border-black/5 overflow-hidden"
             >
               <div className="bg-primary p-8 md:p-10">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
@@ -139,30 +139,38 @@ export default function LoyaltyPage() {
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-gray-100">
-                <div className="p-6 text-center">
-                  <Percent className="mx-auto text-[#d4af37] mb-2" size={24} />
-                  <p className="text-2xl font-bold text-[#1a1a2e]">{currentDiscount}%</p>
-                  <p className="text-sm text-gray-500">Current Discount</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-gray-100 bg-gray-50/50">
+                <div className="p-8 text-center group">
+                  <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:-translate-y-1 transition-transform">
+                    <Percent className="text-accent" size={24} />
+                  </div>
+                  <p className="text-3xl font-black text-primary mb-1">{currentDiscount}%</p>
+                  <p className="text-xs font-bold text-foreground/50 uppercase tracking-widest">Current Discount</p>
                 </div>
-                <div className="p-6 text-center">
-                  <TrendingUp className="mx-auto text-[#d4af37] mb-2" size={24} />
-                  <p className="text-2xl font-bold text-[#1a1a2e]">
+                <div className="p-8 text-center group">
+                  <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:-translate-y-1 transition-transform">
+                    <TrendingUp className="text-accent" size={24} />
+                  </div>
+                  <p className="text-3xl font-black text-primary mb-1">
                     {loyaltyTiers[currentTier].pointMultiplier}x
                   </p>
-                  <p className="text-sm text-gray-500">Point Multiplier</p>
+                  <p className="text-xs font-bold text-foreground/50 uppercase tracking-widest">Point Multiplier</p>
                 </div>
-                <div className="p-6 text-center">
-                  <ShoppingBag className="mx-auto text-[#d4af37] mb-2" size={24} />
-                  <p className="text-2xl font-bold text-[#1a1a2e]">{user.totalPurchases}</p>
-                  <p className="text-sm text-gray-500">Total Orders</p>
+                <div className="p-8 text-center group">
+                  <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:-translate-y-1 transition-transform">
+                    <ShoppingBag className="text-accent" size={24} />
+                  </div>
+                  <p className="text-3xl font-black text-primary mb-1">{user.totalPurchases}</p>
+                  <p className="text-xs font-bold text-foreground/50 uppercase tracking-widest">Total Orders</p>
                 </div>
-                <div className="p-6 text-center">
-                  <Clock className="mx-auto text-[#d4af37] mb-2" size={24} />
-                  <p className="text-2xl font-bold text-[#1a1a2e]">
+                <div className="p-8 text-center group">
+                  <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:-translate-y-1 transition-transform">
+                    <Clock className="text-accent" size={24} />
+                  </div>
+                  <p className="text-xl font-black text-primary mb-1 mt-2">
                     {new Date(user.joinDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
                   </p>
-                  <p className="text-sm text-gray-500">Member Since</p>
+                  <p className="text-xs font-bold text-foreground/50 uppercase tracking-widest">Member Since</p>
                 </div>
               </div>
             </motion.div>
@@ -172,19 +180,19 @@ export default function LoyaltyPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="bg-white rounded-2xl shadow-xl p-8"
+              className="bg-white rounded-[2rem] shadow-xl p-8"
             >
-              <h3 className="text-xl font-bold text-[#1a1a2e] mb-6">Points History</h3>
+              <h3 className="text-2xl font-black text-primary mb-6">Points History</h3>
               {transactions.length > 0 ? (
                 <div className="space-y-4">
                   {transactions.slice(0, 10).map((transaction) => (
                     <div
                       key={transaction.id}
-                      className="flex items-center justify-between p-4 bg-gray-50 rounded-xl"
+                      className="flex items-center justify-between p-5 bg-gray-50 rounded-2xl mb-4 border border-black/5"
                     >
                       <div>
-                        <p className="font-medium text-[#1a1a2e]">{transaction.description}</p>
-                        <p className="text-sm text-gray-500">
+                        <p className="font-bold text-primary text-lg">{transaction.description}</p>
+                        <p className="text-xs font-bold uppercase tracking-wider text-foreground/50 mt-1">
                           {new Date(transaction.date).toLocaleDateString()}
                         </p>
                       </div>
@@ -212,7 +220,7 @@ export default function LoyaltyPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-2xl shadow-xl p-8 max-w-xl mx-auto"
+              className="bg-white rounded-[2rem] shadow-2xl shadow-primary/5 p-10 max-w-xl mx-auto border border-black/5"
             >
               {showSignUp ? (
                 <form onSubmit={handleSignUp} className="space-y-6">
@@ -224,7 +232,7 @@ export default function LoyaltyPage() {
                   </p>
 
                   <div>
-                    <label className="block text-sm font-medium text-foreground/80 mb-2">
+                    <label className="block text-sm font-bold text-primary mb-2 uppercase tracking-wide">
                       Full Name
                     </label>
                     <input
@@ -232,13 +240,13 @@ export default function LoyaltyPage() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-black/10 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all"
+                      className="w-full px-5 py-4 rounded-full border border-black/10 focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-medium text-lg bg-gray-50 focus:bg-white"
                       placeholder="Enter your name"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-bold text-primary mb-2 uppercase tracking-wide">
                       Email Address
                     </label>
                     <input
@@ -246,13 +254,13 @@ export default function LoyaltyPage() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 outline-none"
+                      className="w-full px-5 py-4 rounded-full border border-black/10 focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-medium text-lg bg-gray-50 focus:bg-white"
                       placeholder="Enter your email"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-bold text-primary mb-2 uppercase tracking-wide">
                       Phone Number
                     </label>
                     <input
@@ -260,7 +268,7 @@ export default function LoyaltyPage() {
                       required
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37]/20 outline-none"
+                      className="w-full px-5 py-4 rounded-full border border-black/10 focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all font-medium text-lg bg-gray-50 focus:bg-white"
                       placeholder="Enter your phone"
                     />
                   </div>
@@ -297,7 +305,7 @@ export default function LoyaltyPage() {
 
             {/* Tiers Explanation */}
             <div>
-              <h3 className="text-2xl font-bold text-[#1a1a2e] text-center mb-8">
+              <h3 className="text-3xl md:text-4xl font-black text-primary text-center mb-12 tracking-tight">
                 Membership Tiers
               </h3>
               <div className="grid md:grid-cols-4 gap-6">
@@ -307,15 +315,15 @@ export default function LoyaltyPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-white rounded-2xl shadow-xl p-6 text-center"
+                    className="bg-white rounded-[2rem] shadow-xl shadow-black/5 border border-black/5 p-8 text-center"
                   >
                     <div
-                      className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
-                      style={{ backgroundColor: `${tier.color}20` }}
+                      className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner"
+                      style={{ backgroundColor: `${tier.color}15` }}
                     >
-                      <tier.icon size={32} style={{ color: tier.color }} />
+                      <tier.icon size={36} style={{ color: tier.color }} />
                     </div>
-                    <h4 className="text-xl font-bold text-[#1a1a2e] capitalize mb-2">
+                    <h4 className="text-2xl font-black text-primary capitalize mb-2">
                       {tier.tier}
                     </h4>
                     <p className="text-sm text-gray-500 mb-4">
@@ -335,8 +343,8 @@ export default function LoyaltyPage() {
             </div>
 
             {/* How It Works */}
-            <div className="bg-[#1a1a2e] rounded-2xl p-8 md:p-12">
-              <h3 className="text-2xl font-bold text-white text-center mb-8">
+            <div className="bg-primary rounded-[2rem] p-10 md:p-16 shadow-2xl shadow-primary/20">
+              <h3 className="text-3xl md:text-4xl font-black text-white text-center mb-12 tracking-tight">
                 How It Works
               </h3>
               <div className="grid md:grid-cols-3 gap-8">

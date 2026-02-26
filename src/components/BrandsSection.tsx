@@ -15,7 +15,7 @@ export default function BrandsSection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-accent font-medium tracking-wider uppercase text-sm"
+            className="inline-block bg-primary/5 text-primary font-bold tracking-wider uppercase text-xs px-4 py-2 rounded-full mb-6"
           >
             Trusted Partners
           </motion.span>
@@ -24,7 +24,7 @@ export default function BrandsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold text-primary mt-3 mb-4 tracking-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-black text-primary mb-6 tracking-tight"
           >
             Our Premium Brands
           </motion.h2>
@@ -58,21 +58,21 @@ export default function BrandsSection() {
             >
               <Link
                 href={`/brands/${brand.id}`}
-                className="group block bg-white rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-black/5 hover:border-accent hover:-translate-y-1"
+                className="group block bg-white rounded-3xl p-8 shadow-sm hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 border border-transparent hover:border-black/5 hover:-translate-y-2 h-full"
               >
-                <div className="relative h-20 mb-6">
+                <div className="relative h-20 mb-8">
                   <Image
                     src={brand.logo}
                     alt={brand.name}
                     fill
-                    className="object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500 opacity-70 group-hover:opacity-100"
+                    className="object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500 opacity-60 group-hover:opacity-100 group-hover:scale-110"
                   />
                 </div>
                 <div className="text-center">
-                  <h3 className="font-semibold text-primary group-hover:text-accent transition-colors">
+                  <h3 className="font-bold text-lg text-primary group-hover:text-accent transition-colors">
                     {brand.name}
                   </h3>
-                  <p className="text-sm font-medium text-foreground/50 mt-1">
+                  <p className="text-xs font-bold text-foreground/40 mt-2 uppercase tracking-wide bg-gray-50 py-1.5 px-3 rounded-full inline-block">
                     {brand.productCount} Products
                   </p>
                 </div>

@@ -103,14 +103,14 @@ export default function ProductsPage() {
               placeholder="Search products..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 rounded-xl border border-black/10 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all shadow-sm"
+              className="w-full pl-12 pr-4 py-4 rounded-full border border-black/10 focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all shadow-sm font-medium text-lg bg-white"
             />
           </div>
 
           {/* Filter Toggle (Mobile) */}
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="lg:hidden flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-medium shadow-sm hover:opacity-90 transition-opacity"
+            className="lg:hidden flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white rounded-full font-bold shadow-sm hover:opacity-90 transition-opacity"
           >
             <Filter size={20} />
             Filters
@@ -120,7 +120,7 @@ export default function ProductsPage() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="px-4 py-3 rounded-xl border border-black/10 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none bg-white shadow-sm cursor-pointer font-medium text-foreground/80"
+            className="px-6 py-4 rounded-full border border-black/10 focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none bg-white shadow-sm cursor-pointer font-bold text-primary appearance-none whitespace-nowrap"
           >
             <option value="name">Sort by Name</option>
             <option value="price-low">Price: Low to High</option>
@@ -132,8 +132,8 @@ export default function ProductsPage() {
         <div className="flex gap-8">
           {/* Filters Sidebar */}
           <div
-            className={`${showFilters ? 'fixed inset-0 z-50 bg-white p-6 overflow-auto' : 'hidden'
-              } lg:block lg:relative lg:w-64 lg:flex-shrink-0`}
+            className={`${showFilters ? 'fixed inset-0 z-50 bg-white p-6 overflow-auto custom-scrollbar' : 'hidden'
+              } lg:block lg:relative lg:w-72 lg:flex-shrink-0 bg-white rounded-[2rem] p-8 shadow-xl shadow-black/5 border border-black/5 h-fit`}
           >
             <div className="flex items-center justify-between mb-6 lg:hidden">
               <h3 className="text-xl font-bold">Filters</h3>
@@ -144,17 +144,17 @@ export default function ProductsPage() {
 
             {/* Brand Filter */}
             <div className="mb-8">
-              <h4 className="font-semibold text-[#1a1a2e] mb-4">Brand</h4>
-              <div className="space-y-2">
+              <h4 className="font-bold text-primary mb-4 text-lg">Brand</h4>
+              <div className="space-y-3">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="radio"
                     name="brand"
                     checked={selectedBrand === 'all'}
                     onChange={() => setSelectedBrand('all')}
-                    className="accent-[#d4af37]"
+                    className="w-4 h-4 accent-accent"
                   />
-                  <span>All Brands</span>
+                  <span className="font-medium text-foreground/80">All Brands</span>
                 </label>
                 {brands.map((brand) => (
                   <label key={brand.id} className="flex items-center gap-2 cursor-pointer">
@@ -163,27 +163,27 @@ export default function ProductsPage() {
                       name="brand"
                       checked={selectedBrand === brand.name.toLowerCase()}
                       onChange={() => setSelectedBrand(brand.name.toLowerCase())}
-                      className="accent-[#d4af37]"
+                      className="w-4 h-4 accent-accent"
                     />
-                    <span>{brand.name}</span>
+                    <span className="font-medium text-foreground/80">{brand.name}</span>
                   </label>
                 ))}
               </div>
             </div>
 
             {/* Category Filter */}
-            <div className="mb-8">
-              <h4 className="font-semibold text-[#1a1a2e] mb-4">Category</h4>
-              <div className="space-y-2">
+            <div className="mb-8 pb-8 border-b border-black/5">
+              <h4 className="font-bold text-primary mb-4 text-lg">Category</h4>
+              <div className="space-y-3">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="radio"
                     name="category"
                     checked={selectedCategory === 'all'}
                     onChange={() => setSelectedCategory('all')}
-                    className="accent-[#d4af37]"
+                    className="w-4 h-4 accent-accent"
                   />
-                  <span>All Categories</span>
+                  <span className="font-medium text-foreground/80">All Categories</span>
                 </label>
                 {categories.map((category) => (
                   <label key={category.id} className="flex items-center gap-2 cursor-pointer">
@@ -192,17 +192,17 @@ export default function ProductsPage() {
                       name="category"
                       checked={selectedCategory === category.id}
                       onChange={() => setSelectedCategory(category.id)}
-                      className="accent-[#d4af37]"
+                      className="w-4 h-4 accent-accent"
                     />
-                    <span>{category.name}</span>
+                    <span className="font-medium text-foreground/80">{category.name}</span>
                   </label>
                 ))}
               </div>
             </div>
 
             {/* Price Range */}
-            <div className="mb-8">
-              <h4 className="font-semibold text-[#1a1a2e] mb-4">Price Range</h4>
+            <div className="mb-10">
+              <h4 className="font-bold text-primary mb-6 text-lg">Price Range</h4>
               <div className="space-y-4">
                 <input
                   type="range"
@@ -211,9 +211,9 @@ export default function ProductsPage() {
                   step="500"
                   value={priceRange[1]}
                   onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                  className="w-full accent-[#d4af37]"
+                  className="w-full accent-accent h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                 />
-                <div className="flex justify-between text-sm text-gray-600">
+                <div className="flex justify-between text-sm font-bold text-primary">
                   <span>Rs. {priceRange[0].toLocaleString()}</span>
                   <span>Rs. {priceRange[1].toLocaleString()}</span>
                 </div>
@@ -223,7 +223,7 @@ export default function ProductsPage() {
             {/* Clear Filters */}
             <button
               onClick={clearFilters}
-              className="w-full py-3 border-2 border-accent text-accent rounded-xl font-semibold hover:bg-accent hover:text-white transition-colors"
+              className="w-full py-4 bg-gray-50 text-foreground/60 rounded-full font-bold hover:bg-gray-100 hover:text-primary transition-colors border border-black/5"
             >
               Clear All Filters
             </button>
@@ -231,7 +231,7 @@ export default function ProductsPage() {
             {/* Apply (Mobile) */}
             <button
               onClick={() => setShowFilters(false)}
-              className="lg:hidden w-full mt-4 py-3 bg-primary text-white rounded-xl font-semibold hover:opacity-90 transition-opacity"
+              className="lg:hidden w-full mt-6 py-4 bg-primary text-white rounded-full font-bold hover:opacity-90 transition-opacity shadow-lg shadow-black/10"
             >
               Apply Filters
             </button>
@@ -240,9 +240,11 @@ export default function ProductsPage() {
           {/* Products Grid */}
           <div className="flex-1">
             {/* Results Count */}
-            <p className="text-gray-600 mb-6">
-              Showing {filteredProducts.length} of {products.length} products
-            </p>
+            <div className="flex justify-between items-center mb-6">
+              <p className="font-medium text-foreground/60">
+                Showing <span className="font-bold text-primary">{filteredProducts.length}</span> of {products.length} products
+              </p>
+            </div>
 
             {filteredProducts.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
