@@ -249,7 +249,7 @@ export default function LoyaltyPage() {
                         <div className="relative z-10 w-full px-6 space-y-8">
                            <div className="flex justify-between items-center">
                               <span className="archival-number">Credits Req.</span>
-                              <span className="text-[11px] font-black text-primary tracking-tighter">{tierInfo[i].minPoints}+</span>
+                              <span className="text-[11px] font-black text-primary tracking-tighter">{loyaltyTiers[tier.tier as keyof typeof loyaltyTiers].min}+</span>
                            </div>
                            <div className="w-full h-px bg-black/5" />
                            <div className="flex justify-between items-center group-hover:px-4 transition-all duration-700">
