@@ -8,91 +8,56 @@ import { MoveRight } from 'lucide-react';
 
 export default function BrandsSection() {
   return (
-    <section className="py-40 bg-background relative overflow-hidden">
-      {/* Editorial Header */}
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="grid lg:grid-cols-12 gap-12 mb-32 items-end">
-          <div className="lg:col-span-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex items-center gap-4 mb-8"
-            >
-              <div className="w-12 h-px bg-accent" />
-              <span className="text-accent font-black tracking-[0.4em] uppercase text-[10px]">The Heritage Collection</span>
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
+    <section className="py-32 bg-gray-50 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+        
+        {/* Asian Paints Style Heading */}
+        <div className="mb-24 flex flex-col items-center text-center">
+           <motion.div
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="display-text text-5xl md:text-7xl lg:text-8xl"
-            >
-              World-Class <br />
-              <span className="accent-serif text-accent">Partnerships</span>
-            </motion.h2>
-          </div>
-
-          <div className="lg:col-span-4 lg:text-right">
-            <p className="text-lg text-primary/30 font-medium italic mb-8 max-w-xs ml-auto">
-              We partner with the world's most prestigious pigment houses to ensure unrivaled material integrity.
-            </p>
-          </div>
+              className="flex flex-col gap-4"
+           >
+             <h2 className="text-4xl lg:text-6xl font-black text-gray-900 uppercase tracking-widest">
+                Our <span className="text-[#E31E24]">Partners</span>
+             </h2>
+             <div className="w-24 h-1 bg-[#E31E24] mx-auto rounded-full" />
+             <p className="text-gray-500 font-medium text-lg mt-4 max-w-2xl italic">
+                Strategically partnered with global leaders in architectural aesthetics and material science.
+             </p>
+           </motion.div>
         </div>
 
-        {/* Minimalist Brands Wall - Borderless and Curated */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-px bg-black/5 rounded-[4rem] overflow-hidden shadow-2xl shadow-black/5 border border-black/5">
+        {/* Minimalist Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
           {brands.map((brand, index) => (
             <motion.div
               key={brand.id}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              className="group relative bg-white aspect-square p-12 transition-all duration-[1.2s] ease-[0.16, 1, 0.3, 1] hover:bg-[#FAFAFA] hover:z-20"
+              className="group bg-white Aspect-square rounded-2xl flex items-center justify-center p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 border border-gray-100"
             >
-              <Link
-                href={`/brands/${brand.id}`}
-                className="w-full h-full flex flex-col items-center justify-center"
-              >
-                <div className="relative w-full h-24 mb-6 transition-transform duration-[1.2s] group-hover:scale-110 group-hover:-translate-y-4">
-                  <Image
-                    src={brand.logo}
-                    alt={brand.name}
-                    fill
-                    className="object-contain filter grayscale opacity-20 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-[1s]"
-                  />
-                </div>
-
-                {/* Revealable Portfolio Link */}
-                <div className="absolute bottom-12 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700 delay-100">
-                  <div className="flex items-center gap-3">
-                    <span className="text-[9px] font-black text-primary uppercase tracking-[0.3em]">View Selection</span>
-                    <MoveRight size={14} className="text-accent" />
-                  </div>
-                </div>
+              <Link href={`/brands/${brand.id}`} className="w-full h-full relative">
+                <Image
+                  src={brand.logo}
+                  alt={brand.name}
+                  fill
+                  className="object-contain filter grayscale group-hover:grayscale-0 transition-all duration-700"
+                />
               </Link>
             </motion.div>
           ))}
-
-          {/* Dynamic "Global Index" Tile */}
-          <Link
-            href="/brands"
-            className="group relative bg-primary aspect-square p-12 overflow-hidden flex flex-col items-center justify-center text-center transition-all duration-1000 hover:bg-black"
-          >
-            <div className="absolute top-0 right-0 p-8 opacity-5 rotate-12 group-hover:rotate-0 transition-transform duration-1000">
-              <h2 className="text-8xl font-black text-white">ALL</h2>
-            </div>
-
-            <div className="relative z-10">
-              <p className="text-accent text-[10px] font-black uppercase tracking-[0.5em] mb-4">The Index</p>
-              <h4 className="display-text text-xl md:text-2xl text-white mb-8 tracking-widest leading-tight">
-                Explore All <br /> Elite Partners
-              </h4>
-              <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white transition-all duration-700 group-hover:bg-accent group-hover:text-primary group-hover:border-accent">
+          
+          {/* Explore More Card */}
+          <Link href="/brands" className="group col-span-2 md:col-span-1 bg-[#E31E24] rounded-2xl flex flex-col items-center justify-center p-8 text-center text-white transition-all duration-500 hover:bg-[#c41a1f] shadow-lg">
+             <span className="text-[10px] font-black uppercase tracking-[0.3em] mb-2 opacity-80">Global Network</span>
+             <h4 className="text-xl font-black mb-6">Explore All</h4>
+             <div className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-white group-hover:text-[#E31E24] transition-all">
                 <MoveRight size={20} />
-              </div>
-            </div>
+             </div>
           </Link>
         </div>
       </div>

@@ -4,12 +4,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ShoppingCart, User, Calculator, Palette, Search, MoveRight } from 'lucide-react';
+import { Menu, X, ShoppingCart, User, Calculator, Palette, Search, MoveRight, ChevronDown, MapPin, Phone } from 'lucide-react';
 import { useStore } from '@/store';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
   const cartCount = useStore((state) => state.getCartCount());
 
   useEffect(() => {
@@ -20,137 +21,246 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { href: '/products', label: 'Catalogue' },
-    { href: '/brands', label: 'Partnerships' },
-    { href: '/calculator', label: 'Spatial Metrics' },
-    { href: '/visualizer', label: 'The Atelier' },
-  ];
+  const megaMenus = {
+    Colours: {
+      columns: [
+        {
+          title: 'Colour by family',
+          items: ['All Colours', 'Grey', 'Blue', 'Brown', 'Red', 'Orange', 'Yellow', 'Green', 'Purple', 'Pink', 'Whites', 'Off Whites']
+        },
+        {
+          title: 'Colour Collections',
+          items: ['Royale Designer', 'Colour of the year']
+        },
+        {
+          title: 'Colour Tools',
+          items: ['Colour Quiz', 'Wall Paint Finder', 'Wood Paint Finder', 'Wood Finish Visualiser', 'Textures For You', 'Shade Cards', 'Visualize Shades']
+        },
+        {
+          title: 'Inspirations',
+          items: ['Colour combinations', 'Celebrity homes', 'Home discoveries']
+        }
+      ]
+    },
+    Products: {
+      columns: [
+        {
+          title: 'Interior Wall Products',
+          items: ['Interior Paints', 'Interior Textures', 'Wallpapers']
+        },
+        {
+          title: 'Exterior Wall Products',
+          items: ['Exterior Paints', 'Exterior Textures']
+        },
+        {
+          title: 'Waterproofing Products',
+          items: ['All Waterproofing Products', 'Bathroom Waterproofing', 'Terrace & Tank Waterproofing', 'Cracks & Joints Waterproofing']
+        },
+        {
+          title: 'Wood & Metal Products',
+          items: ['Wood Base', 'Metal Base', 'Clear Finishes']
+        }
+      ]
+    },
+    Services: {
+      columns: [
+        {
+          title: 'Painting Services',
+          items: ['Home Painting', 'Commercial Painting', 'Project Estimates']
+        },
+        {
+          title: 'Consultation',
+          items: ['Expert Color Advice', 'Site Visit Request']
+        }
+      ]
+    }
+  };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[100] transition-all duration-1000">
-      {/* Precision Announcement Bar - Optional premium feel */}
-      <div className={`h-8 bg-primary overflow-hidden transition-all duration-700 ${isScrolled ? 'h-0' : 'h-8'}`}>
-        <div className="flex items-center justify-center h-full">
-          <p className="text-[9px] font-black text-accent uppercase tracking-[0.5em]">Global Shipping Now Available for the 2026 Collection</p>
+    <div 
+      className="fixed top-0 left-0 right-0 z-[100] transition-all duration-500"
+      onMouseLeave={() => setActiveMegaMenu(null)}
+    >
+      {/* Top Utility Bar */}
+      <div className={`bg-[#F4F4F4] border-b border-gray-200 transition-all duration-500 ${isScrolled ? 'h-0 opacity-0 overflow-hidden' : 'h-10 opacity-100'}`}>
+        <div className="max-w-[1400px] mx-auto px-12 h-full flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <Link href="/" className="text-[10px] font-bold text-gray-500 hover:text-black uppercase tracking-wider">Our Company</Link>
+            <Link href="/" className="text-[10px] font-bold text-gray-500 hover:text-black uppercase tracking-wider">Investors</Link>
+            <Link href="/" className="text-[10px] font-bold text-gray-500 hover:text-black uppercase tracking-wider">Careers</Link>
+          </div>
+          <div className="flex items-center gap-6 border-l border-gray-300 pl-6 h-4">
+            <p className="text-[10px] items-center gap-2 font-bold text-gray-500 flex"><Phone size={10} /> 1800-209-5678</p>
+          </div>
         </div>
       </div>
 
-      <nav className={`w-full transition-all duration-1000 ease-[0.16, 1, 0.3, 1] ${isScrolled ? 'py-4' : 'py-10'}`}>
-        <div className={`max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between transition-all duration-1000 ${isScrolled ? 'glass-dark rounded-full py-3 px-10 shadow-2xl shadow-black/20' : ''}`}>
+      <nav className={`w-full bg-white transition-all duration-300 border-b border-gray-100 ${isScrolled ? 'py-2 shadow-lg' : 'py-4'}`}>
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-between">
+          
+          <div className="flex items-center gap-12">
+            {/* Asian Paints Style Logo Section */}
+            <Link href="/" className="flex items-center gap-3">
+              <div className="relative w-12 h-12 invert">
+                <Image src="/images/logo of website.png" alt="Logo" fill className="object-contain" />
+              </div>
+              <div className="flex flex-col">
+                <h1 className="text-xl font-black tracking-tight text-[#E31E24]">TAWAKKAL</h1>
+                <span className="text-[8px] font-bold text-gray-400 tracking-[0.3em] uppercase">Paint House</span>
+              </div>
+            </Link>
 
-          {/* Brand - Extremely Minimalist */}
-          <Link href="/" className="flex items-center gap-4 group">
-            <div className={`relative w-10 h-10 transition-all duration-700 ${isScrolled ? 'scale-90 invert' : 'scale-100'}`}>
-              <Image
-                src="/images/logo of website.png"
-                alt="Logo"
-                fill
-                className="object-contain grayscale contrast-125"
-              />
+            {/* Mega Menu Triggers */}
+            <div className="hidden lg:flex items-center gap-8 ml-8">
+              {Object.keys(megaMenus).map((menu) => (
+                <button
+                  key={menu}
+                  onMouseEnter={() => setActiveMegaMenu(menu)}
+                  className={`relative text-xs font-bold uppercase tracking-widest h-14 border-b-2 transition-all ${
+                    activeMegaMenu === menu ? 'border-[#E31E24] text-[#E31E24]' : 'border-transparent text-gray-600 hover:text-black'
+                  }`}
+                >
+                  {menu}
+                </button>
+              ))}
+              <Link href="/loyalty" className="text-xs font-bold uppercase tracking-widest text-gray-600 hover:text-black">Loyalty</Link>
+              <Link href="/visualizer" className="text-xs font-bold uppercase tracking-widest text-gray-600 hover:text-black">Visualizer</Link>
             </div>
-            <div className="flex flex-col">
-              <h1 className="text-2xl font-black tracking-[-0.05em] leading-none group-hover:text-accent transition-colors">
-                TAWAKKAL <span className="text-accent underline underline-offset-4 decoration-1">ELITE</span>
-              </h1>
-              <span className="text-[8px] font-black uppercase tracking-[0.6em] opacity-40 group-hover:opacity-100 group-hover:text-accent transition-all">
-                Est. MCMXCVIII
-              </span>
-            </div>
-          </Link>
-
-          {/* Nav Links - Center Gravity */}
-          <div className="hidden lg:flex items-center gap-12 absolute left-1/2 -translate-x-1/2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`group relative text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-700 ${isScrolled ? 'text-white/40 hover:text-white' : 'text-primary/40 hover:text-primary'}`}
-              >
-                {link.label}
-                <span className="absolute -bottom-1 left-1/2 w-0 h-px bg-accent transition-all duration-500 group-hover:w-full group-hover:left-0" />
-              </Link>
-            ))}
           </div>
 
-          {/* Action Hub */}
-          <div className="flex items-center gap-6">
-            <div className="hidden lg:flex items-center gap-4">
-              <button className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${isScrolled ? 'text-white hover:bg-white/10' : 'text-primary hover:bg-black/5'}`}>
-                <Search size={16} strokeWidth={2.5} />
-              </button>
-              <Link href="/cart" className={`relative w-10 h-10 rounded-full flex items-center justify-center transition-all ${isScrolled ? 'text-white hover:bg-white/10' : 'text-primary hover:bg-black/5'}`}>
-                <ShoppingCart size={16} strokeWidth={2.5} />
+          {/* Action Icons */}
+          <div className="flex items-center gap-8">
+            <div className="hidden sm:flex items-center gap-2 bg-[#F4F4F4] px-4 py-2 rounded-lg border border-gray-200">
+              <Search size={16} className="text-gray-400" />
+              <input 
+                type="text" 
+                placeholder="Search for paints..." 
+                className="bg-transparent border-none outline-none text-xs w-48 font-medium text-gray-700 placeholder:text-gray-400"
+              />
+            </div>
+
+            <div className="flex items-center gap-6">
+              <Link href="/cart" className="relative group">
+                <ShoppingCart size={20} className="text-gray-700 group-hover:text-[#E31E24] transition-colors" />
                 {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-accent text-primary text-[8px] font-black rounded-full w-4 h-4 flex items-center justify-center shadow-lg">
+                  <span className="absolute -top-2 -right-2 bg-[#E31E24] text-white text-[9px] font-black rounded-full w-4 h-4 flex items-center justify-center">
                     {cartCount}
                   </span>
                 )}
               </Link>
+              <Link href="/profile" className="hidden lg:block">
+                <User size={20} className="text-gray-700 hover:text-[#E31E24]" />
+              </Link>
+              <button className="lg:hidden" onClick={() => setIsMenuOpen(true)}>
+                <Menu size={24} className="text-gray-700" />
+              </button>
             </div>
 
             <Link
-              href="/products"
-              className={`hidden sm:flex items-center gap-3 px-8 py-3.5 rounded-full font-black text-[10px] uppercase tracking-[0.2em] transition-all duration-700 ${isScrolled ? 'bg-accent text-primary hover:bg-white' : 'bg-primary text-white hover:bg-accent hover:text-primary'}`}
+              href="/book-visit"
+              className="hidden md:flex items-center gap-2 bg-[#FFB800] hover:bg-[#E31E24] text-white px-6 py-2.5 rounded-full font-bold text-[11px] uppercase tracking-wider transition-all shadow-md active:scale-95"
             >
-              Shop Collection
-              <MoveRight size={14} />
+              Book Free Site Visit
             </Link>
-
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`lg:hidden w-10 h-10 rounded-full flex items-center justify-center transition-all ${isScrolled ? 'text-white hover:bg-white/10' : 'text-primary hover:bg-black/5'}`}
-            >
-              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
           </div>
         </div>
       </nav>
 
-      {/* Full-Screen High-End Mobile Menu */}
+      {/* Mega Menu Dropdown */}
+      <AnimatePresence>
+        {activeMegaMenu && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-gray-100 pt-10 pb-16 z-50 overflow-hidden"
+          >
+            <div className="max-w-[1400px] mx-auto px-12 grid grid-cols-4 gap-12">
+              {megaMenus[activeMegaMenu as keyof typeof megaMenus].columns.map((col, idx) => (
+                <div key={idx} className="flex flex-col gap-6">
+                  <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 border-b pb-2">{col.title}</h3>
+                  <div className="flex flex-col gap-3">
+                    {col.items.map((item, i) => (
+                      <Link
+                        key={i}
+                        href="/products"
+                        className="text-sm font-medium text-gray-600 hover:text-[#E31E24] transition-colors flex items-center justify-between group"
+                      >
+                        {item}
+                        {item.includes('New') && <span className="bg-[#E31E24] text-white text-[8px] px-1.5 py-0.5 rounded font-black ml-2 uppercase">New</span>}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mt-12 bg-[#F9F9F9] py-8 border-t border-gray-100">
+               <div className="max-w-[1400px] mx-auto px-12 flex items-center justify-between">
+                  <div className="flex gap-12">
+                    <div className="flex items-center gap-3 text-xs font-bold text-gray-500 uppercase tracking-widest">
+                       <Palette size={16} className="text-[#E31E24]" /> Visualizer
+                    </div>
+                    <div className="flex items-center gap-3 text-xs font-bold text-gray-500 uppercase tracking-widest">
+                       <Calculator size={16} className="text-[#E31E24]" /> Budget Calculator
+                    </div>
+                  </div>
+                  <Link href="/products" className="text-xs font-black text-[#E31E24] uppercase tracking-[0.2em] flex items-center gap-2 group">
+                    View All Categories <MoveRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+               </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Mobile Menu Backdrop */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.1 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 bg-primary z-[200] flex flex-col p-12 lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 z-[300] lg:hidden"
+            onClick={() => setIsMenuOpen(false)}
           >
-            <div className="flex justify-between items-center mb-24">
-              <span className="text-white font-black tracking-[0.4em] uppercase text-xs">Menu</span>
-              <button onClick={() => setIsMenuOpen(false)} className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white">
-                <X size={24} />
-              </button>
-            </div>
-
-            <div className="flex flex-col gap-8">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 + (i * 0.1), duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="display-text text-5xl text-white hover:text-accent transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="mt-auto pt-12 border-t border-white/10 flex flex-col gap-4">
-              <p className="text-[10px] font-black text-white/20 uppercase tracking-[0.5em] mb-4">Official Channels</p>
-              <div className="flex gap-8">
-                <a href="#" className="text-xs font-black text-white uppercase tracking-widest">Instagram</a>
-                <a href="#" className="text-xs font-black text-white uppercase tracking-widest">Behance</a>
-                <a href="#" className="text-xs font-black text-white uppercase tracking-widest">WhatsApp</a>
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="absolute right-0 top-0 bottom-0 w-80 bg-white p-8 flex flex-col gap-8 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex justify-between items-center">
+                <h2 className="text-lg font-black text-gray-800 tracking-tight">Navigation</h2>
+                <button onClick={() => setIsMenuOpen(false)} className="p-2 hover:bg-gray-100 rounded-full">
+                  <X size={24} className="text-gray-800" />
+                </button>
               </div>
-            </div>
+
+              <div className="flex flex-col gap-6">
+                {Object.keys(megaMenus).map((menu) => (
+                  <div key={menu} className="border-b border-gray-100 pb-4">
+                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">{menu}</p>
+                    <div className="flex flex-col gap-3 pl-2">
+                       {megaMenus[menu as keyof typeof megaMenus].columns[0].items.slice(0, 4).map(item => (
+                         <Link key={item} href="/products" className="text-sm font-bold text-gray-600">{item}</Link>
+                       ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-auto space-y-4">
+                <Link href="/book-visit" className="w-full py-4 bg-[#FFB800] text-primary rounded-xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2">
+                   Book Free Visit
+                </Link>
+                <Link href="/cart" className="w-full py-4 border border-gray-200 text-gray-800 rounded-xl font-black uppercase text-xs tracking-widest flex items-center justify-center gap-2">
+                   View Cart ({cartCount})
+                </Link>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
