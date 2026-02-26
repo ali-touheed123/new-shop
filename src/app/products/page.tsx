@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Filter, Grid, List, X, MoveRight, SlidersHorizontal, ChevronDown, ArrowUpRight } from 'lucide-react';
+import { Search, Filter, Grid, List, X, MoveRight, SlidersHorizontal, ChevronDown, ArrowUpRight, Hash } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 import { products, brands, categories } from '@/lib/data';
 
@@ -36,176 +36,289 @@ export default function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-background pb-32">
-      {/* Editorial Header */}
-      <div className="relative pt-48 pb-32 overflow-hidden bg-white px-6 sm:px-8 lg:px-12">
-        {/* Dynamic Watermark */}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#F9F8F6] -skew-x-12 translate-x-1/2" />
+      {/* Vogue-Cover Editorial Header */}
+      <div className="relative h-[70vh] flex items-center justify-center overflow-hidden bg-white border-b border-black/5">
+        
+        {/* Abstract Architectural BG */}
+        <div className="absolute inset-0 opacity-[0.03] select-none pointer-events-none">
+           <div className="absolute top-0 left-1/4 w-px h-full bg-primary" />
+           <div className="absolute top-0 right-1/4 w-px h-full bg-primary" />
+           <div className="absolute top-1/2 left-0 w-full h-px bg-primary" />
+        </div>
 
-        <div className="max-w-[1400px] mx-auto relative z-10">
+        {/* Floating "Inventory" Text in BG */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.02]">
+           <h2 className="text-[30vw] font-black tracking-tighter uppercase whitespace-nowrap">CATALOGUE</h2>
+        </div>
+
+        <div className="relative z-10 text-center max-w-5xl px-6">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-4 mb-10"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex items-center gap-4 mb-16 p-2 pr-8 rounded-full glass border border-black/5 shadow-2xl"
           >
-            <div className="w-12 h-px bg-accent" />
-            <span className="text-accent font-black tracking-[0.4em] uppercase text-[10px]">The Global Collection</span>
+            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white text-[10px] font-black">26</div>
+            <span className="text-accent font-black tracking-[0.5em] uppercase text-[9px]">The Master Archvie</span>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="display-text text-5xl md:text-8xl"
+          <div className="relative">
+             <motion.h1 
+               initial={{ opacity: 0, y: 100 }}
+               animate={{ opacity: 1, y: 0 }}
+               className="display-text text-6xl md:text-[10vw] mb-4 relative z-20"
+             >
+               Artisanal <span className="accent-serif text-accent lowercase">vol.</span>
+             </motion.h1>
+             
+             <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: '100%' }}
+                className="absolute top-1/2 left-0 h-px bg-black/5 -z-10"
+             />
+
+             <motion.h2 
+               initial={{ opacity: 0, y: 50 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ delay: 0.3 }}
+               className="display-text text-5xl md:text-[8vw] text-accent tracking-[0.1em] mt-[-2vw]"
+             >
+               Inventory
+             </motion.h2>
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="text-lg md:text-2xl text-primary/30 max-w-xl mx-auto mt-16 font-medium italic leading-relaxed"
           >
-            Artisanal <br />
-            <span className="accent-serif text-accent">Catalogue</span>
-          </motion.h1>
+            "A curated index of molecular brilliance, indexed for the architectural avant-garde."
+          </motion.p>
+        </div>
+
+        {/* Vertical Scroll Indicator */}
+        <div className="absolute bottom-12 left-12 flex flex-col items-center gap-6">
+           <span className="archival-number rotate-90 origin-left ml-2">INDEX.01</span>
+           <div className="w-px h-24 bg-gradient-to-b from-primary/10 to-accent" />
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 mt-20">
-
-        {/* Advanced Search & Filtering Terminal */}
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
-
-          {/* Sidebar - Institutional Filter Column */}
-          <aside className="lg:col-span-3 space-y-16">
-
-            {/* Search Hub */}
-            <div className="relative group">
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-primary/20 group-focus-within:text-accent transition-colors" size={18} />
-              <input
-                type="text"
-                placeholder="Inquire Collection..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-16 pr-6 py-5 rounded-full bg-white border border-black/5 shadow-sm outline-none focus:border-accent font-bold text-xs uppercase tracking-widest transition-all"
-              />
-            </div>
-
-            {/* Filter Groups */}
-            <div className="space-y-12 bg-white p-12 rounded-[3.5rem] shadow-2xl shadow-black/5 border border-black/5">
-              <div>
-                <h4 className="heading-luxury mb-8">Brand Portfolio</h4>
-                <div className="flex flex-col gap-4">
-                  <button
-                    onClick={() => setSelectedBrand('all')}
-                    className={`text-[10px] font-black uppercase tracking-[0.2em] text-left transition-colors ${selectedBrand === 'all' ? 'text-accent' : 'text-primary/20 hover:text-primary'}`}
-                  >
-                    Global Index
-                  </button>
-                  {brands.map(b => (
-                    <button
-                      key={b.id}
-                      onClick={() => setSelectedBrand(b.name.toLowerCase())}
-                      className={`text-[10px] font-black uppercase tracking-[0.2em] text-left transition-colors ${selectedBrand === b.name.toLowerCase() ? 'text-accent' : 'text-primary/20 hover:text-primary'}`}
-                    >
-                      {b.name}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-12 border-t border-black/5">
-                <h4 className="heading-luxury mb-8">Surface Specialty</h4>
-                <div className="flex flex-col gap-4">
-                  {categories.map(c => (
-                    <button
-                      key={c.id}
-                      onClick={() => setSelectedCategory(c.id)}
-                      className={`text-[10px] font-black uppercase tracking-[0.2em] text-left transition-colors ${selectedCategory === c.id ? 'text-accent' : 'text-primary/20 hover:text-primary'}`}
-                    >
-                      {c.name}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-12 border-t border-black/5">
-                <h4 className="heading-luxury mb-8">Value Tier</h4>
-                <div className="flex justify-between items-end mb-6">
-                  <span className="text-[10px] font-black text-primary/20 uppercase">Max</span>
-                  <span className="text-xl font-black text-primary tracking-tighter">Rs. {priceRange[1].toLocaleString()}</span>
-                </div>
+      <div className="max-w-[1500px] mx-auto px-6 sm:px-8 lg:px-12 mt-32">
+        
+        <div className="grid lg:grid-cols-12 gap-24 items-start">
+          
+          {/* Sidebar - Museum Filter Terminal */}
+          <aside className="lg:col-span-3 space-y-20">
+             
+             {/* Studio Search Terminal */}
+             <div className="relative group">
+                <Search className="absolute left-8 top-1/2 -translate-y-1/2 text-primary/10 group-focus-within:text-accent transition-colors duration-500" size={20} />
                 <input
-                  type="range"
-                  min="0"
-                  max="10000"
-                  step="500"
-                  value={priceRange[1]}
-                  onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                  className="w-full h-1 bg-black/5 rounded-full appearance-none accent-accent cursor-pointer"
+                  type="text"
+                  placeholder="ARCHIVAL SEARCH..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-20 pr-8 py-7 rounded-[2rem] bg-white border border-black/5 shadow-premium outline-none focus:ring-1 focus:ring-accent/20 font-black text-[11px] uppercase tracking-[0.3em] transition-all"
                 />
-              </div>
-            </div>
+                <div className="absolute right-8 top-1/2 -translate-y-1/2 flex gap-2">
+                   <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                   <div className="w-1.5 h-1.5 rounded-full bg-primary/5" />
+                </div>
+             </div>
 
-            {/* Vertical Image Callout */}
-            <div className="relative aspect-[3/4] rounded-[3.5rem] overflow-hidden group shadow-2xl">
-              <Image src="/images/categories/interior.png" alt="Callout" fill className="object-cover transition-transform duration-[3s] group-hover:scale-110" />
-              <div className="absolute inset-0 bg-primary/40" />
-              <div className="absolute inset-0 p-12 flex flex-col justify-end text-white">
-                <p className="accent-serif text-3xl mb-6">The Essence of Quality</p>
-                <Link href="/loyalty" className="group/link flex items-center gap-4">
-                  <span className="text-[9px] font-black uppercase tracking-[0.4em]">Join Circle</span>
-                  <MoveRight size={14} className="group-hover/link:translate-x-2 transition-transform" />
-                </Link>
-              </div>
-            </div>
+             {/* Museum Filter Hub */}
+             <div className="bg-white p-14 rounded-[4rem] shadow-3xl shadow-black/[0.02] border border-black/[0.03]">
+                
+                {/* Brand Portfolio with Archival Numbers */}
+                <div>
+                  <div className="flex justify-between items-center mb-10">
+                     <h4 className="heading-luxury">Portfolio Index</h4>
+                     <Hash size={12} className="text-primary/10" />
+                  </div>
+                  <div className="flex flex-col gap-6">
+                    <button 
+                      onClick={() => setSelectedBrand('all')}
+                      className="group flex items-center justify-between"
+                    >
+                      <span className={`text-[10px] font-black uppercase tracking-[0.3em] transition-all ${selectedBrand === 'all' ? 'text-accent' : 'text-primary/30 group-hover:text-primary'}`}>Global Archive</span>
+                      <span className="archival-number">00</span>
+                    </button>
+                    {brands.map((b, i) => (
+                      <button 
+                        key={b.id}
+                        onClick={() => setSelectedBrand(b.name.toLowerCase())}
+                        className="group flex items-center justify-between"
+                      >
+                        <span className={`text-[10px] font-black uppercase tracking-[0.3em] transition-all ${selectedBrand === b.name.toLowerCase() ? 'text-accent' : 'text-primary/30 group-hover:text-primary'}`}>{b.name}</span>
+                        <span className="archival-number">{i + 1 < 10 ? `0${i+1}` : i+1}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="my-14 h-px bg-gradient-to-r from-transparent via-black/5 to-transparent" />
+
+                {/* Specialty with Museum Labels */}
+                <div>
+                  <h4 className="heading-luxury mb-10">Material Integrity</h4>
+                  <div className="flex flex-wrap gap-3">
+                    {categories.map(c => (
+                      <button 
+                        key={c.id}
+                        onClick={() => setSelectedCategory(c.id)}
+                        className={`px-6 py-3 rounded-full text-[9px] font-black uppercase tracking-widest border transition-all ${selectedCategory === c.id ? 'bg-primary text-white border-primary' : 'bg-transparent text-primary/40 border-black/5 hover:border-accent hover:text-accent'}`}
+                      >
+                        {c.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="my-14 h-px bg-gradient-to-r from-transparent via-black/5 to-transparent" />
+
+                {/* Price Terminal */}
+                <div>
+                  <div className="flex justify-between items-end mb-8">
+                    <h4 className="heading-luxury">Value CAP</h4>
+                    <span className="text-2xl font-black text-primary tracking-tighter">Rs. {priceRange[1].toLocaleString()}</span>
+                  </div>
+                  <div className="relative py-4">
+                     <div className="absolute inset-0 flex items-center">
+                        <div className="w-full h-0.5 bg-black/5" />
+                     </div>
+                     <input
+                       type="range"
+                       min="0"
+                       max="10000"
+                       step="500"
+                       value={priceRange[1]}
+                       onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
+                       className="relative z-10 w-full h-1 bg-transparent appearance-none accent-accent cursor-pointer"
+                     />
+                  </div>
+                </div>
+             </div>
+
+             {/* Studio Fidelity Promotion */}
+             <motion.div 
+               whileHover={{ y: -10 }}
+               className="relative p-12 bg-primary rounded-[4rem] text-white overflow-hidden shadow-2xl group"
+             >
+                <div className="absolute top-0 right-0 p-8 opacity-[0.05] group-hover:rotate-12 transition-transform duration-[2s]">
+                   <Sparkles size={120} />
+                </div>
+                <div className="relative z-10">
+                   <span className="text-accent text-[8px] font-black uppercase tracking-[0.5em] mb-6 block">Luxe Fidelity</span>
+                   <h3 className="display-text text-3xl mb-8 normal-case italic font-serif">"Masterful Color Accuracy"</h3>
+                   <Link href="/visualizer" className="flex items-center gap-4 group/link">
+                      <span className="text-[10px] font-black uppercase tracking-[0.4em]">Learn More</span>
+                      <div className="h-px w-10 bg-accent transition-all duration-700 group-hover/link:w-20" />
+                   </Link>
+                </div>
+             </motion.div>
           </aside>
 
           {/* Catalog Grid */}
           <main className="lg:col-span-9">
-            <div className="flex justify-between items-center mb-12 pb-6 border-b border-black/5">
-              <span className="text-[10px] font-black text-primary/20 uppercase tracking-[0.5em]">
-                {filteredProducts.length} Results Discovered
-              </span>
-              <div className="flex items-center gap-4">
-                <span className="text-[9px] font-black uppercase tracking-widest text-primary/30">Sort By</span>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="bg-transparent text-[10px] font-black uppercase tracking-widest outline-none cursor-pointer"
-                >
-                  <option value="name">Alpha Order</option>
-                  <option value="price-low">Price Ascent</option>
-                  <option value="price-high">Price Descent</option>
-                </select>
-              </div>
+            <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
+               <div className="flex items-center gap-6">
+                  <div className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center text-primary font-black text-xs">
+                     {filteredProducts.length}
+                  </div>
+                  <span className="museum-label tracking-[0.4em]">Index Entries Discovered</span>
+               </div>
+               
+               <div className="flex items-center gap-10">
+                  <div className="flex gap-4">
+                     <button className="p-3 text-primary"><Grid size={18} /></button>
+                     <button className="p-3 text-primary/20 hover:text-primary transition-colors"><List size={18} /></button>
+                  </div>
+                  <div className="h-10 w-px bg-black/5" />
+                  <div className="flex items-center gap-4">
+                     <span className="text-[9px] font-black uppercase tracking-widest text-primary/20">Archived By</span>
+                     <select 
+                       value={sortBy}
+                       onChange={(e) => setSortBy(e.target.value)}
+                       className="bg-transparent text-[10px] font-black uppercase tracking-widest outline-none cursor-pointer text-accent"
+                     >
+                       <option value="name">Alpha Order</option>
+                       <option value="price-low">Value Ascent</option>
+                       <option value="price-high">Value Descent</option>
+                     </select>
+                  </div>
+               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-20">
-              <AnimatePresence mode="popLayout">
-                {filteredProducts.map((product) => (
-                  <motion.div
-                    layout
-                    key={product.id}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <ProductCard product={product} />
-                  </motion.div>
-                ))}
-              </AnimatePresence>
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-24">
+               <AnimatePresence mode="popLayout">
+                 {filteredProducts.map((product, index) => (
+                   <motion.div
+                     layout
+                     key={product.id}
+                     initial={{ opacity: 0, y: 40 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     exit={{ opacity: 0, scale: 0.95 }}
+                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: (index % 6) * 0.05 }}
+                   >
+                     <ProductCard product={product} />
+                   </motion.div>
+                 ))}
+               </AnimatePresence>
             </div>
 
             {filteredProducts.length === 0 && (
-              <div className="py-40 text-center bg-white rounded-[4rem] border border-dashed border-black/10">
-                <Search size={64} className="mx-auto mb-10 text-primary/5" />
-                <h2 className="display-text text-3xl mb-4">No Matches</h2>
-                <p className="text-primary/30 font-medium italic mb-10">Try refining your archival search criteria.</p>
-                <button
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="py-48 text-center bg-white rounded-[5rem] border border-dashed border-black/10"
+              >
+                 <div className="w-32 h-32 bg-background rounded-full flex items-center justify-center mx-auto mb-12 opacity-5">
+                    <Search size={64} />
+                 </div>
+                 <h2 className="display-text text-4xl mb-6">Archive Empty</h2>
+                 <p className="text-primary/30 font-medium italic mb-12 max-w-xs mx-auto">No pigment records match your current archival search parameters.</p>
+                 <button 
                   onClick={() => { setSearchQuery(''); setSelectedBrand('all'); setSelectedCategory('all'); }}
-                  className="btn-ultimate mx-auto"
-                >
-                  <span>Clear Filters</span>
-                </button>
-              </div>
+                   className="btn-ultimate mx-auto group"
+                 >
+                   <span>Reset Archives</span>
+                   <RefreshCw size={14} className="group-hover:rotate-180 transition-transform duration-1000" />
+                 </button>
+              </motion.div>
             )}
+            
+            {/* Pagination / End Mark */}
+            <div className="mt-40 pt-20 border-t border-black/5 flex flex-col items-center">
+               <div className="w-2 h-2 rounded-full bg-accent mb-8" />
+               <span className="text-[9px] font-black text-primary/20 uppercase tracking-[0.5em]">Terminal Archive Reached</span>
+            </div>
           </main>
 
         </div>
       </div>
     </div>
+  );
+}
+
+function RefreshCw(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+      <path d="M21 3v5h-5" />
+      <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+      <path d="M8 16H3v5" />
+    </svg>
   );
 }

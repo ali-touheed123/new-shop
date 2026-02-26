@@ -166,6 +166,27 @@ body::before {
   .mask-organic {
     mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
   }
+
+  .mask-vogue {
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  }
+
+  /* Ultra-Premium Utilities */
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent via-[#F3E5AB] to-accent;
+  }
+
+  .museum-label {
+    @apply text-[8px] font-black uppercase tracking-[0.5em] text-primary/30 border-l border-primary/10 pl-4;
+  }
+
+  .archival-number {
+    @apply text-[9px] font-black font-mono text-accent/40;
+  }
+
+  .studio-glow {
+    box-shadow: 0 0 100px -20px var(--accent);
+  }
 }
 
 /* Global Smooth Scroll Fixes */
