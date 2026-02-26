@@ -18,7 +18,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div className="group relative">
-      <div className="relative aspect-[4/5] rounded-[2.5rem] bg-[#F7F7F7] overflow-hidden transition-all duration-[800ms] ease-[0.16, 1, 0.3, 1] group-hover:scale-[0.98] group-hover:rounded-[3.5rem] shadow-sm hover:shadow-2xl">
+      <div className="relative aspect-[4/5] rounded-[2.5rem] bg-[#F7F7F7] overflow-hidden transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[0.98] group-hover:rounded-[3.5rem] shadow-sm hover:shadow-2xl">
 
         {/* Editorial Badges */}
         <div className="absolute top-8 left-8 z-10 flex flex-col gap-2">
@@ -43,12 +43,12 @@ export default function ProductCard({ product }: ProductCardProps) {
             src={product.image}
             alt={product.name}
             fill
-            className="object-contain p-12 mix-blend-multiply transition-transform duration-[1.5s] ease-[0.16, 1, 0.3, 1] group-hover:scale-110"
+            className="object-contain p-12 mix-blend-multiply transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
           />
         </Link>
 
         {/* Action Hub - Slips out from bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[0.16, 1, 0.3, 1]">
+        <div className="absolute bottom-0 left-0 right-0 p-8 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
           <button
             onClick={() => addToCart(product)}
             className="w-full bg-primary text-white py-5 rounded-2xl flex items-center justify-center gap-4 font-black text-[10px] uppercase tracking-[0.3em] shadow-2xl shadow-black/20 hover:bg-accent hover:text-primary transition-all duration-500"

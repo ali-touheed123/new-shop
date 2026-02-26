@@ -136,7 +136,7 @@ body::before {
 
   /* High-End Motion Cards */
   .card-ultimate {
-    @apply relative overflow-hidden transition-all duration-[800ms] ease-[0.16, 1, 0.3, 1];
+    @apply relative overflow-hidden transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)];
     background: white;
     box-shadow: var(--shadow-premium);
   }
@@ -154,7 +154,7 @@ body::before {
 
   .btn-ultimate::before {
     content: "";
-    @apply absolute inset-0 bg-accent translate-y-full transition-transform duration-500 ease-[0.16, 1, 0.3, 1];
+    @apply absolute inset-0 bg-accent translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)];
   }
 
   .btn-ultimate:hover {
@@ -217,7 +217,7 @@ body::before {
 }
 
 .hover-luxury-scale {
-  @apply transition-transform duration-1000 ease-[0.16, 1, 0.3, 1];
+  @apply transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)];
 }
 
 .hover-luxury-scale:hover {
