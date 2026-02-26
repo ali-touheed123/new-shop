@@ -1,18 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0A0A0B;
+  --color-secondary: #1C1C1E;
+  --color-accent: #DCC58C;
+  --color-accent-muted: #BFA87C;
+  --color-background: #FDFCFB;
+  --color-foreground: #0A0A0B;
+  
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  --radius-4xl: 2rem;
+  --radius-5xl: 3rem;
+  --radius-6xl: 4rem;
+  
+  --shadow-premium: 0 40px 100px -30px rgba(0, 0, 0, 0.05);
+  --shadow-ultimate: 0 60px 120px -20px rgba(0, 0, 0, 0.12);
+}
 
 :root {
-  --primary: #0A0A0B;
-  --secondary: #1C1C1E;
-  --accent: #DCC58C;
-  /* Vintage Gold */
-  --accent-muted: #BFA87C;
-  --foreground: #0A0A0B;
-  --background: #FDFCFB;
-  /* Silk White */
   --glass: rgba(253, 252, 251, 0.7);
   --glass-dark: rgba(10, 10, 11, 0.8);
   --border: rgba(10, 10, 11, 0.05);
@@ -31,7 +41,7 @@
   left: 0;
   width: 8px;
   height: 8px;
-  background-color: var(--accent);
+  background-color: var(--color-accent);
   border-radius: 50%;
   pointer-events: none;
   z-index: 10000;
@@ -44,7 +54,7 @@
   left: 0;
   width: 40px;
   height: 40px;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--color-accent);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
@@ -56,11 +66,11 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: 'Outfit', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
   scrollbar-width: thin;
-  scrollbar-color: var(--accent) transparent;
+  scrollbar-color: var(--color-accent) transparent;
 }
 
 /* Luxury Grain/Noise Texture Overlay */
@@ -79,40 +89,36 @@ body::before {
 
 /* Custom Selection */
 ::selection {
-  background-color: var(--accent);
-  color: var(--primary);
+  background-color: var(--color-accent);
+  color: var(--color-primary);
 }
 
 @layer base {
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-black tracking-tighter uppercase;
-    font-family: 'Outfit', sans-serif;
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tighter uppercase;
+    font-weight: 900;
+    font-family: var(--font-sans);
   }
 }
 
 @layer components {
-
   /* Typography Classes */
   .display-text {
-    @apply font-black leading-[0.85] tracking-[-0.04em] uppercase;
+    @apply leading-[0.85] tracking-[-0.04em] uppercase;
+    font-weight: 900;
     font-size: clamp(3rem, 10vw, 12rem);
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-sans);
   }
 
   .accent-serif {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-serif);
     @apply italic font-normal normal-case tracking-normal;
   }
 
   .heading-luxury {
-    @apply font-black tracking-[0.2em] uppercase text-xs sm:text-sm;
-    color: var(--accent);
+    @apply tracking-[0.2em] uppercase text-xs sm:text-sm;
+    font-weight: 900;
+    color: var(--color-accent);
   }
 
   /* Glassmorphism Evolution */
@@ -132,17 +138,18 @@ body::before {
   .card-ultimate {
     @apply relative overflow-hidden transition-all duration-[800ms] ease-[0.16, 1, 0.3, 1];
     background: white;
-    box-shadow: 0 40px 100px -30px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-premium);
   }
 
   .card-ultimate:hover {
     @apply -translate-y-4;
-    box-shadow: 0 60px 120px -20px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-ultimate);
   }
 
   /* Ultimate CTA */
   .btn-ultimate {
-    @apply relative px-12 py-5 bg-primary text-white rounded-full font-black text-xs uppercase tracking-[0.3em] overflow-hidden transition-all duration-500 flex items-center gap-4;
+    @apply relative px-12 py-5 bg-primary text-white rounded-full text-xs uppercase tracking-[0.3em] overflow-hidden transition-all duration-500 flex items-center gap-4;
+    font-weight: 900;
   }
 
   .btn-ultimate::before {
@@ -177,15 +184,18 @@ body::before {
   }
 
   .museum-label {
-    @apply text-[8px] font-black uppercase tracking-[0.5em] text-primary/30 border-l border-primary/10 pl-4;
+    @apply text-[8px] uppercase tracking-[0.5em] text-primary/30 border-l border-primary/10 pl-4;
+    font-weight: 900;
   }
 
   .archival-number {
-    @apply text-[9px] font-black font-mono text-accent/40;
+    @apply text-[9px] text-accent/40;
+    font-weight: 900;
+    font-family: var(--font-mono);
   }
 
   .studio-glow {
-    box-shadow: 0 0 100px -20px var(--accent);
+    box-shadow: 0 0 100px -20px var(--color-accent);
   }
 }
 
