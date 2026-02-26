@@ -50,11 +50,11 @@ export default function Navbar() {
               />
             </div>
             <div className="flex flex-col">
-              <span className={`text-xl font-black tracking-[-0.05em] leading-none transition-colors duration-700 ${isScrolled ? 'text-white' : 'text-primary'}`}>
-                TAWAKKAL
-              </span>
-              <span className={`text-[8px] font-black tracking-[0.5em] transition-colors duration-700 ${isScrolled ? 'text-accent' : 'text-primary/30'}`}>
-                ELITE HOUSE
+              <h1 className="text-2xl font-black tracking-[-0.05em] leading-none group-hover:text-accent transition-colors">
+                TAWAKKAL <span className="text-accent underline underline-offset-4 decoration-1">ELITE</span>
+              </h1>
+              <span className="text-[8px] font-black uppercase tracking-[0.6em] opacity-40 group-hover:opacity-100 group-hover:text-accent transition-all">
+                Est. MCMXCVIII
               </span>
             </div>
           </Link>

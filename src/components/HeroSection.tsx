@@ -30,23 +30,29 @@ export default function HeroSection() {
           {/* Text Content (Cols 1-7) */}
           <div className="lg:col-span-7">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              initial="hidden"
+              animate="show"
+              variants={containerVariants}
             >
-              <div className="flex items-center gap-4 mb-12">
-                <div className="w-12 h-px bg-accent" />
-                <span className="text-accent font-black tracking-[0.4em] uppercase text-[10px]">The 2026 Collection — Artisanal Edition</span>
-              </div>
+              <motion.div variants={itemVariants} className="flex items-center gap-4 mb-12">
+                <div className="w-12 h-px bg-gradient-to-r from-accent to-yellow-500" />
+                <span className="text-accent font-black tracking-[0.4em] uppercase text-[10px]">Archival Numbers — 2026</span>
+              </motion.div>
 
-              <h1 className="display-text mb-12">
-                The Art of <br />
-                <span className="accent-serif text-accent">Pure</span> Living
-              </h1>
+              <motion.h1
+                variants={itemVariants}
+                className="display-text text-5xl md:text-[10vw] mb-4 text-white drop-shadow-2xl"
+              >
+                The Master <br />
+                <span className="text-gradient-gold accent-serif text-[8vw] lowercase">Palette</span>
+              </motion.h1>
 
-              <p className="text-xl md:text-2xl text-primary/40 leading-relaxed font-medium max-w-xl mb-16 italic">
-                Redefining architectural aesthetics with high-performance pigments and visionary finishes.
-              </p>
+              <motion.p
+                variants={itemVariants}
+                className="text-lg md:text-2xl text-white/40 max-w-xl mx-auto mb-16 font-medium italic leading-relaxed"
+              >
+                "Beyond pigment. Beyond color. We curate the chemical soul of architectural space."
+              </motion.p>
 
               <div className="flex flex-wrap gap-8 items-center mb-24">
                 <Link href="/products" className="btn-ultimate">
