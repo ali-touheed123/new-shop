@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Filter, Grid, List, X, MoveRight, SlidersHorizontal, ChevronDown, ArrowUpRight, Hash } from 'lucide-react';
+import { Search, Filter, Grid, List, X, MoveRight, SlidersHorizontal, ChevronDown, ArrowUpRight, Hash, Sparkles } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 import { products, brands, categories } from '@/lib/data';
 
