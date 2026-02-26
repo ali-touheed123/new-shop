@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ShoppingCart, User, Calculator, Palette, Search, MoveRight, ChevronDown, MapPin, Phone } from 'lucide-react';
+import { Menu, X, ShoppingCart, User, Calculator, Palette, Search, MoveRight, Phone } from 'lucide-react';
 import { useStore } from '@/store';
 
 export default function Navbar() {

@@ -2,8 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ShoppingCart, Heart, Eye, Sparkles, MoveRight } from 'lucide-react';
+import { ShoppingCart, Heart } from 'lucide-react';
 import { useStore } from '@/store';
 import { Product } from '@/types';
 
@@ -14,7 +13,9 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const addToCart = useStore((state) => state.addToCart);
 
-  const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+  const discount = product.originalPrice 
+    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+    : 0;
 
   return (
     <div className="group relative">
@@ -66,7 +67,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           {product.name}
         </h3>
         <div className="flex items-center gap-4">
-          {product.originalPrice > product.price && (
+          {product.originalPrice && product.originalPrice > product.price && (
             <span className="text-xs font-black text-primary/10 line-through uppercase tracking-widest">
               Rs. {product.originalPrice.toLocaleString()}
             </span>
@@ -79,7 +80,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Subtle Visual Finish Tag */}
         <div className="mt-6 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
           <div className="w-2 h-2 rounded-full bg-accent" />
-          <span className="text-[9px] font-black text-primary uppercase tracking-widest">{product.category} Finish</span>
+          <span className="text-[9px] font-black text-primary uppercase tracking-widest capitalize">{product.category} Finish</span>
         </div>
       </div>
     </div>
